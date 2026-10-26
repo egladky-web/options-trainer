@@ -1,0 +1,870 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light dark"><title>Опционная мастерская — универсальный тренажёр 1.2</title>
+<style>:root{--bg:#f4f3ef;--card:#fff;--ink:#213345;--muted:#677582;--line:#dce1e4;--soft:#f5f7f8;--navy:#263f60;--orange:#c66d35;--purple:#8b65b1;--green:#16816b;--red:#b84e4b;--shadow:0 5px 20px #20324705;color-scheme:light}
+:root[data-theme=dark]{--bg:#101a25;--card:#192635;--ink:#e0e8ee;--muted:#9eafbd;--line:#334352;--soft:#203041;--navy:#8badda;--orange:#efa16d;--purple:#bc9bdf;--green:#69c7aa;--red:#f29e98;--shadow:none;color-scheme:dark}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:13px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.app{max-width:1540px;margin:auto;padding:14px 20px}header{display:flex;justify-content:space-between;align-items:center;gap:20px;margin-bottom:13px}h1{font-size:21px;font-weight:650;letter-spacing:-.5px;margin:0}h1 span{font-size:12px;color:var(--muted);font-weight:400;margin-left:5px}h2{font-size:13px;margin:0;font-weight:650}small,.muted{font-size:11px;color:var(--muted)}nav,.button-row{display:flex;gap:7px;flex-wrap:wrap}button,input,select,textarea{font:inherit}button{border:1px solid var(--line);border-radius:7px;background:var(--card);color:var(--ink);padding:8px 11px;cursor:pointer;font-weight:550;transition:background .12s}button:hover{background:var(--soft)}button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:2px solid var(--orange);outline-offset:2px}button:disabled{opacity:.45;cursor:default}.primary{background:#294765;color:white;border-color:#294765}.primary:hover{background:#3d5f7e}.danger-outline{color:var(--red);width:100%;margin-top:9px}.outline{border-color:var(--navy);color:var(--navy)}.small{padding:4px 7px;font-size:10px}.market-strip{display:flex;align-items:center;gap:30px;background:var(--card);padding:10px 15px;border:1px solid var(--line);border-radius:9px;margin-bottom:10px}.market-strip>div{display:flex;flex-direction:column;gap:1px}.market-strip>div:first-child{flex-direction:row;align-items:baseline;gap:9px}.market-strip b{font-size:26px;letter-spacing:-.5px}.eyebrow{font-size:10px;color:var(--muted)}.seed-block{margin-left:auto;max-width:220px}.seed-block code{overflow:hidden;text-overflow:ellipsis;font-size:11px;white-space:nowrap}.state{font-size:10px;color:var(--green)}.risk-panel,.card,.chart-card,.trade-panel,.time-panel{background:var(--card);border:1px solid var(--line);border-radius:9px;box-shadow:var(--shadow)}.risk-panel{padding:9px 13px;margin-bottom:10px}.section-line{display:flex;align-items:center;gap:10px;justify-content:space-between;margin-bottom:7px}.section-line>span:last-child{margin-left:auto}.risk-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:7px}.risk-grid>div{display:flex;flex-direction:column;gap:2px}.risk-grid span{font-size:10px;color:var(--muted)}.risk-grid b{font-size:16px;font-weight:600;letter-spacing:-.2px}.pnl-grid{padding-top:7px;margin-top:8px;border-top:1px solid var(--line)}#capitalWarning{color:var(--red);font-size:11px}.workspace{display:grid;grid-template-columns:minmax(0,1fr) 117px 282px;gap:10px;align-items:start}.chart-card{padding:11px 12px 7px;overflow:hidden}.chart-head{display:flex;gap:12px;align-items:center;justify-content:space-between}.chart-head .check{font-size:10px;white-space:nowrap}.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:10px;margin-top:7px;margin-left:30px}.legend span:before{content:"";display:inline-block;width:17px;border-top:2px solid;vertical-align:middle;margin-right:5px}.legend .navy:before{border-top-style:dashed}.orange{color:var(--orange)}.navy{color:var(--navy)}.gray{color:var(--muted)}.purple{color:var(--purple)}svg{display:block;width:100%;height:auto;overflow:visible}#pnlChart{max-height:294px;min-height:205px}.chart-note{font-size:10px;color:var(--muted);min-height:17px;white-space:normal}.time-panel{padding:10px 8px;display:flex;flex-direction:column;gap:7px}.time-panel h2{text-align:center;margin-bottom:2px}.time-panel button{font-size:11px;padding:9px 5px}.time-panel small{font-size:10px;line-height:1.5;margin-top:3px}.trade-panel{padding:10px}.trade-panel .section-line{margin-bottom:8px}.two,.three{display:grid;gap:8px}.two{grid-template-columns:repeat(2,minmax(0,1fr))}.three{grid-template-columns:repeat(3,minmax(0,1fr))}label{display:flex;flex-direction:column;gap:4px;font-size:11px;color:var(--muted);margin-bottom:8px}input,select,textarea{width:100%;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:7px 8px;min-width:0}input[type=checkbox]{width:14px;height:14px;accent-color:var(--orange)}input[type=range]{accent-color:var(--purple)}.check{display:flex;flex-direction:row;align-items:center;gap:6px;margin-bottom:0;cursor:pointer;color:var(--ink)}.quote{font-size:11px;line-height:1.6;padding:7px 8px;background:var(--soft);border-radius:6px;margin-bottom:9px;min-height:49px}.preview{font-size:10px;line-height:1.55;min-height:44px;margin-top:8px}.message{font-size:11px;min-height:27px;padding:5px 3px;color:var(--muted)}.message.error,.error{color:var(--red)}.positions{padding:9px 12px;margin-bottom:10px}.greek-line{font-size:11px;display:flex;gap:14px;flex-wrap:wrap}.table-scroll{width:100%;overflow-x:auto}table{width:100%;border-collapse:collapse;font-size:11px}td,th{text-align:right;padding:7px 8px;border-bottom:1px solid var(--line);white-space:nowrap;font-variant-numeric:tabular-nums}th{font-weight:500;color:var(--muted);font-size:10px}td:first-child,th:first-child{text-align:left}td input{width:65px;padding:4px;display:inline-block;margin-right:4px}.positions small{display:block;margin-top:6px;font-size:10px}.empty{text-align:center!important;color:var(--muted);padding:17px}.fold-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.card{margin-bottom:10px}details summary{list-style-position:inside;cursor:pointer;padding:11px 13px;font-size:12px;font-weight:550}summary span{font-weight:400;color:var(--muted);font-size:10px;margin-left:9px}.fold-body{padding:3px 13px 12px}.fold-body>p{font-size:11px;line-height:1.6}.fold-body input{max-width:100%}details svg{padding:3px 12px}.leg-controls{display:flex;flex-wrap:wrap;gap:5px 12px;margin-top:6px}.leg-controls label{font-size:10px}.help p{max-width:1000px}.risk-detail-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.risk-detail-grid div{padding:8px;background:var(--soft);border-radius:6px}.risk-detail-grid b{display:block;margin-top:3px}#reportText{margin:10px 0;font:11px/1.5 ui-monospace,monospace;min-height:210px}.positive{color:var(--green)}.negative{color:var(--red)}footer{font-size:10px;color:var(--muted);text-align:center;padding:8px}.error{font-size:12px}.preset-preview{padding:12px 14px;border-radius:8px;background:var(--soft);font-size:12px;line-height:1.7;margin:5px 0 10px}.preset-preview .formula{font-family:ui-monospace,monospace;font-size:11px;overflow-wrap:anywhere}.preset-preview b{font-weight:600}.dialog-head{display:flex;justify-content:space-between;align-items:start;gap:20px;margin-bottom:10px}.dialog-head h2{font-size:21px}.dialog-head p{margin:5px 0}.dialog-head button{font-size:22px;line-height:1;padding:5px 10px}.dialog-bottom{display:flex;justify-content:space-between;gap:20px;align-items:center}.seed-input{display:grid;grid-template-columns:2fr auto 1fr;gap:10px;align-items:center}.seed-input button{margin-top:9px}dialog{width:min(820px,94vw);max-height:94vh;overflow:auto;border:1px solid var(--line);border-radius:12px;background:var(--card);color:var(--ink);padding:22px;box-shadow:0 20px 100px #0003}dialog::backdrop{background:#15273566;backdrop-filter:blur(3px)}dialog label{font-size:11px;margin-bottom:10px}dialog select,dialog input{padding:9px}dialog form{margin:0}[hidden]{display:none!important}
+.chart-readout{display:flex;flex-wrap:wrap;gap:8px 20px;background:var(--soft);border:1px solid var(--line);border-radius:7px;padding:9px 11px;margin:3px 0 7px;font-variant-numeric:tabular-nums}.chart-readout>div{display:flex;flex-direction:column;min-width:110px}.chart-readout span{font-size:10px}.chart-readout b{font-size:15px;font-weight:650;white-space:nowrap}#pnlChart{cursor:crosshair}.positions tfoot{background:var(--soft)}.positions tfoot th,.positions tfoot td{border-top:2px solid var(--line);border-bottom:0;padding-top:10px;padding-bottom:10px;color:var(--ink);font-size:13px;font-weight:650}.positions tfoot .totals-note{font-size:10px;font-weight:400;color:var(--muted)}
+.desk-toolbar{display:flex;align-items:center;gap:20px;flex-wrap:wrap}.desk-toolbar label{width:160px;margin:0}.desk-toolbar p{margin:0}.desk-help{color:var(--muted)}.option-desk .desk-group{text-align:center;font-weight:650;font-size:12px;background:var(--soft);color:var(--ink)}.option-desk .desk-strike{text-align:center;background:var(--soft);font-weight:650;color:var(--ink);border-left:1px solid var(--line);border-right:1px solid var(--line)}.option-desk th small,.option-desk td small{display:block;font-size:9px}.option-desk td:first-child{text-align:right}.desk-quote{width:100%;min-width:74px;padding:5px 8px;font-variant-numeric:tabular-nums;font-size:11px}.desk-buy{color:var(--green)}.desk-sell{color:var(--red)}.desk-atm .desk-strike{box-shadow:inset 3px 0 var(--orange)}.desk-held{background:var(--soft)}
+
+:root{--long-bg:#edf7f0;--short-bg:#fff0ee;--buy-border:#b3d9c1;--sell-border:#e8bcb8}
+:root[data-theme=dark]{--long-bg:#183d35;--short-bg:#422b32;--buy-border:#386955;--sell-border:#78515a}
+.position-row{--row-bg:var(--card);background:var(--row-bg)}.position-long{--row-bg:var(--long-bg)}.position-short{--row-bg:var(--short-bg)}.position-row td:first-child{position:sticky;left:0;z-index:1;background:var(--row-bg);border-left:3px solid var(--green)}.position-short td:first-child{border-left-color:var(--red)}.position-name{white-space:nowrap;font-size:11px}.position-name input{flex-shrink:0;margin-right:1px}.position-excluded td:not(:first-child){opacity:.4}.position-excluded .position-name{text-decoration:line-through}.positions tfoot .positive{color:var(--green)}.positions tfoot .negative{color:var(--red)}.closed-result th{text-align:left;color:var(--muted)}.closed-result{background:var(--soft)}
+.side-buy,button.primary.side-buy{color:var(--green);background:var(--long-bg);border-color:var(--buy-border)}.side-sell,button.primary.side-sell{color:var(--red);background:var(--short-bg);border-color:var(--sell-border)}.side-buy:hover,.side-sell:hover{filter:brightness(.97)}#tradeSide option{background:var(--card);color:var(--ink)}
+.desk-theory{background:var(--soft);font-weight:650;color:var(--ink)}.desk-quote{display:flex;flex-direction:column;gap:1px;align-items:center;min-width:86px;padding:5px 7px}.desk-quote span{font-size:9px;font-weight:500}.desk-quote b{font-size:11px}.desk-preview{font-size:9px;padding:3px 5px;width:100%;border:0;background:transparent;color:var(--muted);font-weight:400}.desk-order{padding:5px}.desk-status{min-height:25px;font-size:12px;color:var(--green);padding:3px 0}.desk-status.error{color:var(--red)}
+.scenario-banner{display:flex;justify-content:space-between;gap:15px;align-items:center;padding:12px 15px;margin-bottom:10px;background:var(--soft);border:1px solid var(--purple);border-left:4px solid var(--purple);border-radius:8px}.scenario-banner b{color:var(--purple)}.scenario-banner p{margin:4px 0;font-variant-numeric:tabular-nums}.scenario-banner button{flex-shrink:0}.scenario-banner small{display:block}
+#pnlChart,#deltaChart{cursor:crosshair;touch-action:none;user-select:none}#pnlChart{min-height:230px;max-height:340px}#deltaChart{min-height:190px;max-height:280px}.chart-cursor text{font-variant-numeric:tabular-nums}.chart-readout b{font-variant-numeric:tabular-nums}
+@media(min-width:1400px){#pnlChart{max-height:320px}.app{padding-top:18px}.workspace{grid-template-columns:minmax(0,1fr) 124px 300px}.time-panel button{padding:10px}.risk-grid b{font-size:17px}}
+@media(max-width:1050px){.workspace{grid-template-columns:minmax(0,1fr) 104px 250px}.app{padding:10px}.market-strip{gap:15px}.market-strip>div:first-child .eyebrow{display:none}.risk-grid b{font-size:14px}.chart-head{flex-wrap:wrap;gap:6px}.chart-head h2{flex:1}.chart-head .small{font-size:9px}.legend{gap:8px}.seed-block{max-width:120px}}
+@media(max-width:800px){header{align-items:start}nav{justify-content:end}nav button{font-size:10px;padding:6px}.market-strip{flex-wrap:wrap;gap:10px 20px}.market-strip .seed-block{margin-left:0}.workspace{grid-template-columns:minmax(0,1fr) 105px}.trade-panel{grid-column:1/-1}.risk-grid{grid-template-columns:repeat(3,1fr);gap:9px}.fold-grid{grid-template-columns:1fr}.seed-input{grid-template-columns:1fr auto}.seed-input label:last-child{grid-column:1/-1}.risk-detail-grid{grid-template-columns:1fr 1fr}.section-line>span:last-child{font-size:9px}.three{grid-template-columns:1fr 1fr}dialog{padding:16px}.dialog-bottom{flex-direction:column;align-items:stretch}}
+
+@media(max-width:600px){.app{padding:9px}header{display:block}h1{font-size:20px}nav{margin-top:10px;justify-content:flex-start}nav button{min-height:40px;padding:8px;font-size:11px}.market-strip{padding:9px;gap:9px 18px}.market-strip b{font-size:25px}.risk-panel{padding:9px}.risk-panel .section-line{flex-wrap:wrap}.risk-panel .section-line>span:last-child{margin-left:0}.risk-grid b{font-size:14px}.workspace{grid-template-columns:1fr}.chart-card{padding:10px 7px}.chart-head{gap:7px}.chart-head h2{flex-basis:100%}.legend{margin-left:5px;gap:5px 10px}.time-panel{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.time-panel h2,.time-panel small{grid-column:1/-1;text-align:left}.time-panel button{min-height:43px}.trade-panel{grid-column:auto;padding:12px}input,select{font-size:16px}button{min-height:38px}#pnlChart{min-height:210px}.chart-readout{gap:7px 12px;padding:8px}.chart-readout>div{min-width:115px}.chart-readout b{font-size:14px}.positions{padding:9px}.positions .section-line{align-items:flex-start;flex-direction:column}.greek-line{font-size:11px;gap:10px}.positions table{min-width:950px}.option-desk table{min-width:1050px}.desk-toolbar{gap:8px}.desk-toolbar label{width:145px}.desk-help{font-size:11px}.desk-quote{min-height:44px}.desk-preview{min-height:30px}.fold-grid{grid-template-columns:1fr}.scenario-banner{align-items:stretch;flex-direction:column}.scenario-banner button{align-self:flex-start}.three{grid-template-columns:1fr 1fr}.dialog-head h2{font-size:20px}.risk-detail-grid{grid-template-columns:1fr}.seed-input{grid-template-columns:1fr}.seed-input button{margin-top:0}#deltaChart{min-height:190px}}
+
+.account-panel{border-top:3px solid var(--navy)}.active-panel{border-top:3px solid var(--orange)}.panel-explanation{font-size:10px;line-height:1.5;color:var(--muted);margin:8px 0 0}.active-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.account-detail-grid{grid-template-columns:repeat(3,minmax(0,1fr));padding-top:8px}.account-details{margin-top:7px;border-top:1px solid var(--line)}.account-details summary{padding:7px 0 0;font-size:10px;color:var(--muted)}.account-details b{font-size:14px}.account-panel .section-line,.active-panel .section-line{flex-wrap:wrap}.active-panel .section-line #capitalWarning{margin-left:auto}@media(max-width:600px){.active-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.account-detail-grid{grid-template-columns:1fr;gap:8px}.panel-explanation{font-size:10px}.account-panel .section-line>span{flex-basis:100%;margin-left:0}.account-details summary{font-size:11px}}
+.position-return{margin-top:2px;line-height:1.4}.position-return strong{font-size:13px;font-weight:600;white-space:nowrap}
+:root{--whatif:#167c80}[data-theme=dark]{--whatif:#6bcac5}.whatif-text{color:var(--whatif)}.workspace-tabs{display:flex;gap:6px;margin:15px 0 10px;border-bottom:1px solid var(--line);padding-bottom:8px}.workspace-tabs [aria-selected=true]{background:var(--navy);color:var(--card);border-color:var(--navy)}.whatif-controls,.whatif-result{padding:14px}.whatif-controls{border-top:3px solid var(--whatif)}.whatif-badge{color:var(--whatif);font-size:11px;font-weight:600}.whatif-inputs{display:grid;grid-template-columns:1.15fr 1.2fr 1fr 1fr;gap:14px;align-items:start}.whatif-actions{display:flex;justify-content:space-between;gap:12px;align-items:center}.calendar-settings{margin-top:10px;border-top:1px solid var(--line)}.calendar-settings summary{padding:9px 0;font-size:11px}.calendar-settings label{max-width:300px}.whatif-charts{display:grid;grid-template-columns:1fr 1fr;gap:12px}.whatif-charts .legend{margin-left:0}.whatif-charts .chart-note{margin-top:6px;min-height:32px}.whatif-charts svg{touch-action:none;user-select:none;-webkit-user-select:none}.whatif-result .section-line{align-items:start;flex-wrap:wrap}.whatif-result .section-line span{font-size:11px}.whatif-result .risk-grid{margin-top:12px}.whatif-charts .chart-readout{flex-wrap:wrap}.whatif-charts .chart-readout>div{min-width:95px}
+@media(max-width:1050px){.whatif-charts{grid-template-columns:1fr}.whatif-inputs{grid-template-columns:1fr 1fr}.whatif-charts svg{max-height:430px}}
+@media(max-width:600px){.whatif-controls,.whatif-result{padding:11px}.whatif-inputs{grid-template-columns:1fr;gap:2px}.whatif-actions{align-items:stretch;flex-direction:column}.whatif-result .risk-grid{grid-template-columns:1fr 1fr}.whatif-charts svg{max-height:none}.whatif-charts .chart-readout{gap:8px}.workspace-tabs button{min-height:42px}.whatif-result .section-line span{flex-basis:100%}}
+</style></head>
+<body><div class="app">
+<header><div><h1>Опционная мастерская <span>1.2</span></h1><small>Универсальный актив · европейские опционы · учебная модель</small></div>
+<nav aria-label="Управление игрой"><button id="newGame" class="primary">Новая игра</button><button id="sameMarket">Переиграть тот же рынок</button><button id="theme" aria-label="Сменить тему">Тема</button></nav></header>
+<section class="market-strip" aria-label="Текущий рынок"><div><span class="eyebrow">Цена актива</span><b id="spot">100,00</b><span id="priceChange" class="muted"></span></div><div><span class="eyebrow">Прошло</span><strong id="clock">0 д 00:00</strong></div><div><span class="eyebrow">До экспирации</span><strong id="remaining">14 дней</strong></div><div><span class="eyebrow">Текущая IV</span><strong id="iv">60%</strong></div><div class="seed-block"><span class="eyebrow">Seed рынка</span><code id="seedLabel"></code></div><span id="gameState" class="state">Тренировка</span></section>
+<section class="risk-panel account-panel" aria-label="Весь счёт">
+<div class="section-line"><h2>Весь счёт</h2><span class="muted">Реальная игра · все сделки, включая закрытые</span></div>
+<div class="risk-grid account-grid">
+<div><span>Начальный депозит</span><b id="deposit"></b></div><div><span>Стоимость счёта при закрытии</span><b id="equity"></b></div><div><span>P&amp;L всей игры</span><b id="net"></b></div><div><span>Свободный резерв</span><b id="free"></b></div><div><span>Доходность депозита</span><b id="depositReturn"></b></div><div><span>Макс. просадка счёта</span><b id="drawdown"></b></div>
+</div>
+<p class="panel-explanation">Стоимость счёта = начальный депозит + P&amp;L всех сделок после предполагаемого закрытия. Свободный резерв дополнительно вычитает занятый капитал.</p>
+<details class="account-details"><summary>Реализованный результат, ROI стратегии и пик капитала</summary><div class="risk-grid account-detail-grid"><div><span>Реализовано, с уплаченными комиссиями</span><b id="realized"></b></div><div><span>Пиковая занятость за всю игру</span><b id="peak"></b></div><div><span>ROI стратегии на пик капитала</span><b id="roi"></b></div></div><p class="panel-explanation">ROI стратегии = P&amp;L всей игры ÷ пиковый занятый капитал. Доходность депозита считается от начального депозита. Это разные базы сравнения.</p></details>
+</section>
+<section class="risk-panel active-panel" aria-label="Действующая позиция">
+<div class="section-line"><h2>Действующая позиция</h2><span id="activeCount" class="muted"></span><span id="capitalWarning" role="status"></span></div>
+<div class="risk-grid active-grid"><div><span>Занято сейчас</span><b id="used"></b></div><div><span>Модельное ГО</span><b id="margin"></b></div><div><span>Переоценка открытых объёмов*</span><b id="unrealized"></b><span class="position-return"><strong id="openReturn"></strong> от занятого капитала</span></div><div><span>Учебный ориентир на входе</span><b id="allocation"></b></div></div>
+<p class="panel-explanation">Только открытые объёмы реальной игры. * Переоценка по теоретическим ценам относительно входа, до расходов закрытия; комиссии учтены в результате счёта. Процент = эта переоценка ÷ занятый сейчас капитал × 100%; без положительной базы — «—». ГО — условный резерв, а не максимальный убыток.</p>
+</section>
+<div class="workspace-tabs" role="tablist" aria-label="Режим работы"><button id="trainerTab" role="tab" aria-selected="true" aria-controls="trainerPanel">Тренажёр</button><button id="whatIfTab" role="tab" aria-selected="false" aria-controls="whatIfPanel" tabindex="-1">What if · сценарии</button></div>
+<section id="whatIfPanel" role="tabpanel" aria-labelledby="whatIfTab" hidden>
+<section class="card whatif-controls"><div class="section-line"><h2>Что будет с текущей конструкцией?</h2><span class="whatif-badge">Расчёт без сделок</span></div>
+<p class="muted">Счёт выше относится к фактической игре. Здесь сохраняем текущие объёмы и уже полученный результат, меняем только условия оценки. Будущие сделки и работа ботов не моделируются.</p>
+<form id="whatIfForm"><div class="whatif-inputs">
+<label>Когда оценить<select id="wiMode"><option value="now">Сейчас</option><option value="after" selected>Через время</option><option value="date">На дату и время UTC</option></select></label>
+<div id="wiAfter" class="two"><label>Через дней<input id="wiDays" type="number" min="0" max="30" step="1" value="5"></label><label>И часов<input id="wiHours" type="number" min="0" max="23.75" step="0.25" value="0"></label></div>
+<label id="wiDateBox" hidden>Дата оценки, UTC<input id="wiDate" type="datetime-local" step="60"></label>
+<label>Цена актива · необязательно<input id="wiPrice" type="number" min="0" max="1000000000" step="any" placeholder="Текущая цена"></label>
+<label>IV, % · необязательно<input id="wiIV" type="number" min="0.01" max="500" step="any" placeholder="Текущая IV"></label></div>
+<div class="whatif-actions"><span class="muted">Пустая цена или IV = текущее значение. Расчёт обновляется при вводе.</span><button id="wiReset" type="button">Сбросить к текущему моменту</button></div>
+<details class="calendar-settings"><summary>Игровой календарь UTC</summary><label>Дата и время начала игры<input id="wiCalendarStart" type="datetime-local" step="60"></label><p id="wiCalendarInfo" class="muted"></p><p class="muted">Это календарная привязка дня 0. Она не меняет рынок и сохраняется в JSON партии.</p></details></form>
+<p id="wiError" class="error" role="alert" hidden></p><p id="wiScope" class="muted"></p>
+</section>
+<div id="wiResults">
+<section class="card whatif-result"><div class="section-line"><h2>При выбранных условиях</h2><span id="wiConditions" class="whatif-text"></span></div>
+<div class="risk-grid"><div><span>Цена сценария</span><b id="wiResultPrice"></b></div><div><span>P&amp;L при закрытии / расчёте</span><b id="wiResultNet"></b></div><div><span>Изменение к текущей оценке</span><b id="wiResultChange"></b></div><div><span>Delta · Δ</span><b id="wiResultDelta"></b></div><div><span>Gamma · Γ</span><b id="wiResultGamma"></b></div><div><span>Theta / сутки</span><b id="wiResultTheta"></b></div></div>
+<p id="wiSettlementNote" class="panel-explanation"></p></section>
+<div class="whatif-charts"><section class="chart-card card"><h2>P&amp;L · сравнение сценария</h2>
+<div class="legend"><span class="orange">Сейчас: при закрытии</span><span class="navy">На экспирации</span><span class="whatif-text">What if</span></div><p id="wiPnlLegend" class="chart-note"></p>
+<svg id="wiPnlChart" viewBox="0 0 900 430" role="img" aria-label="P&L текущей позиции и сценария What if"></svg>
+<div class="chart-readout"><div><span id="wiHoverMode">Цена сценария</span><b id="wiHoverPrice"></b></div><div><span>Сейчас</span><b id="wiHoverCurrent"></b></div><div class="whatif-text"><span>What if</span><b id="wiHoverNet"></b></div><div><span>Экспирация</span><b id="wiHoverExpiry"></b></div></div>
+</section><section class="chart-card card"><h2>Delta · сравнение сценария</h2>
+<div class="legend"><span class="navy">Сейчас</span><span class="whatif-text">What if</span></div><p id="wiDeltaLegend" class="chart-note"></p>
+<svg id="wiDeltaChart" viewBox="0 0 900 430" role="img" aria-label="Delta текущей позиции и сценария What if"></svg>
+<div class="chart-readout"><div><span id="wiDeltaMode">Цена сценария</span><b id="wiDeltaPrice"></b></div><div><span>Delta сейчас</span><b id="wiDeltaCurrent"></b></div><div class="whatif-text"><span>Delta What if</span><b id="wiDeltaValue"></b></div></div></section></div>
+<p class="muted">Цена в форме задаёт отмеченную точку. Бирюзовая линия показывает весь диапазон цен при выбранных времени и IV. Под курсором меняется только цена. Сдвиг из отдельного эксперимента IV сюда не добавляется.</p>
+</div></section>
+<section id="trainerPanel" role="tabpanel" aria-labelledby="trainerTab">
+<section id="scenarioBanner" class="scenario-banner" hidden><div><b>Просмотр без выбранных ног</b><p id="scenarioStats"></p><small>Графики и итоги таблицы показывают эксперимент. Сделки, боты и оба блока счёта сверху относятся к реальной игре.</small></div><button id="includeAll">Вернуть все ноги</button></section>
+<main class="workspace"><section class="chart-card" aria-label="Схема позиции">
+<div class="chart-head"><h2>P&amp;L всей позиции</h2><label class="check"><input type="checkbox" id="showLegs"> Линии отдельных ног</label><button class="small" id="resetRange">Все страйки и безубыточности</button></div>
+<div class="legend"><span class="orange">Сейчас: при закрытии</span><span class="navy">На экспирации</span><span class="gray">По средней оценке</span><span id="ivLegend" class="purple" hidden>Эксперимент IV</span></div>
+<svg id="pnlChart" viewBox="0 0 900 340" role="img" aria-label="Суммарный P&L при разных ценах актива"></svg>
+<div id="hoverInfo" class="chart-readout" aria-label="Значения P&L при выбранной цене">
+<div><span id="hoverMode">Текущая цена актива</span><b id="hoverPrice"></b></div>
+<div class="orange"><span>Сейчас: при закрытии</span><b id="hoverCurrent"></b></div>
+<div class="navy"><span>На экспирации</span><b id="hoverExpiry"></b></div>
+<div class="gray"><span>По средней оценке</span><b id="hoverMark"></b></div>
+<div id="hoverIVBox" class="purple" hidden><span>Эксперимент IV</span><b id="hoverIV"></b></div>
+</div>
+<div class="chart-note">Ведите мышью или пальцем по графику: рамки покажут P&amp;L и цену. Текущие время и IV фиксированы.</div>
+<div id="breakEvens" class="chart-note"></div><div id="legControls" class="leg-controls" hidden></div>
+</section>
+<aside class="time-panel" aria-label="Перемотка времени"><h2>Время</h2><button data-steps="1">+15 минут</button><button data-steps="4">+1 час</button><button data-steps="8">+2 часа</button><button data-steps="16">+4 часа</button><button data-steps="96">+24 часа</button><button id="toExpiry" class="outline">К экспирации</button><small>Бот и автовыход проверяются каждые 15 минут.</small></aside>
+<aside class="trade-panel" aria-label="Торговая панель"><div class="section-line"><h2>Сделка</h2><span class="muted">×1 единица актива</span></div>
+<div class="two"><label>Инструмент<select id="asset"><option value="call">CALL</option><option value="put">PUT</option><option value="future">FUT</option></select></label><label>Направление<select id="tradeSide"><option value="buy">Купить</option><option value="sell">Продать</option></select></label></div>
+<div class="two"><label>Страйк<input id="strike" type="number" step="any" min="0.001" value="105" list="strikes"></label><label>Количество<input id="tradeQty" type="number" step="1" min="1" value="1"></label></div><datalist id="strikes"></datalist>
+<label>Лимитная цена <span class="muted">· необязательно</span><input id="limit" type="number" step="any" min="0" placeholder="Рыночная по Bid/Ask"></label><div id="quote" class="quote"></div>
+<div class="two"><button id="preview">Примерить</button><button id="execute" class="primary">Исполнить</button></div><div id="tradePreview" class="preview muted">Примерка покажет влияние сделки до исполнения.</div>
+<button id="closeAll" class="danger-outline">Закрыть всю позицию</button>
+</aside></main>
+<div id="message" class="message" role="status" aria-live="polite">Выберите параметры новой игры.</div>
+<section class="positions card"><div class="section-line"><h2>Открытые позиции</h2><div id="greeks" class="greek-line"></div></div>
+<div class="table-scroll"><table><thead><tr><th>✓ Инструмент</th><th>Количество</th><th>Средняя цена входа</th><th>Теор. цена</th><th>Денежный объём</th><th>Delta · Δ</th><th>Gamma · Γ</th><th>Θ / сутки</th><th>P&amp;L ноги*</th><th>Закрыть частично</th></tr></thead><tbody id="positions"></tbody><tfoot><tr><th colspan="5" scope="row" id="positionTotalLabel">Итого по игре</th><td id="totalDelta"></td><td id="totalGamma"></td><td id="totalTheta"></td><td id="totalPnl"></td><td class="totals-note">При закрытии</td></tr></tfoot></table></div>
+<small>* P&amp;L включает прошлые закрытия этой ноги, комиссии и расходы предполагаемого закрытия. Результат полностью закрытых ног показан отдельной строкой и входит в итог.</small><small>Денежный объём = |количество| × текущая теоретическая цена; для FUT — номинал по текущей цене актива. Это не ГО. Галочка включает весь вклад ноги в расчётный просмотр, включая её накопленный P&amp;L; снятие галочки не исполняет сделку.</small></section>
+<details class="card option-desk" id="deskFold"><summary>Доска опционов <span id="deskMini">модельные котировки CALL / PUT</span></summary><div class="fold-body">
+<div class="desk-toolbar"><label>Количество для заявки<input id="deskQty" type="number" min="1" max="10000" step="1" value="1"></label><p id="deskContext" class="muted"></p></div>
+<p class="desk-help"><b>«Купить» и «Продать» исполняют сделку сразу</b> с указанным количеством по Ask/Bid. Кнопка «Примерить» только переносит заявку в панель «Сделка». Теоретические цены рядом со страйком: Black–Scholes при нулевых ставке и дивидендах, эквивалентный Black–76 в этой модели. Все котировки синтетические.</p>
+<div id="deskStatus" class="desk-status" role="status" aria-live="polite"></div>
+<div class="table-scroll"><table><thead><tr><th colspan="5" class="desk-group">CALL</th><th rowspan="2" class="desk-strike">Страйк ↓</th><th colspan="5" class="desk-group">PUT</th></tr><tr><th>В позиции</th><th>Delta / 1</th><th>Bid · продать</th><th>Ask · купить</th><th>Теор. CALL</th><th>Теор. PUT</th><th>Bid · продать</th><th>Ask · купить</th><th>Delta / 1</th><th>В позиции</th></tr></thead><tbody id="deskRows"></tbody></table></div>
+<p class="muted">«В позиции» — текущий открытый объём: плюс — куплено, минус — продано. Показаны ближайшие страйки и все страйки открытых позиций. Любой другой положительный страйк можно задать в панели «Сделка».</p>
+</div></details>
+<div class="fold-grid">
+<details class="card" id="deltaFold"><summary>График дельты <span id="deltaMini"></span></summary><svg id="deltaChart" viewBox="0 0 900 280" role="img" aria-label="Суммарная дельта позиции при разных ценах"></svg><div class="fold-body"><div class="chart-readout"><div><span id="deltaHoverMode">Текущая цена актива</span><b id="deltaHoverPrice"></b></div><div class="navy"><span>Суммарная Delta</span><b id="deltaHoverValue"></b></div><div id="deltaHoverIVBox" class="purple" hidden><span>Delta · эксперимент IV</span><b id="deltaHoverIV"></b></div></div><p class="muted">Ведите мышью или пальцем. Учтены включённые в просмотр опционы и FUT. После экспирационного расчёта открытых позиций нет.</p></div></details>
+<details class="card" id="botFold"><summary>Delta Bot <span id="botMini">выключен</span></summary><div class="fold-body"><label class="check"><input type="checkbox" id="botEnabled"> Включить Delta Bot</label><div class="three"><label>Цель Δ<input id="botTarget" type="number" value="0" step="0.1"></label><label>Шаг FUT<input id="botStep" type="number" value="0.4" min="0.01" step="0.01"></label><label>Допуск ±Δ<input id="botTolerance" type="number" value="0.5" min="0" step="0.01"></label></div><button id="applyBot">Применить настройки</button><p class="muted">Одна сделка до выбранного шага на каждый 15-минутный момент. Последняя может быть меньше. Бот не перелетает через цель. Лимит капитала только предупреждает.</p><div id="botStats"></div></div></details>
+<details class="card" id="ivFold"><summary>Эксперимент с IV <span id="ivMini">без изменения игры</span></summary><div class="fold-body"><label>Сдвиг IV, процентные пункты <input id="ivShift" type="range" min="-50" max="100" step="1" value="0"></label><div class="two"><strong id="ivShiftLabel">0 п.п.</strong><button id="resetIV">Сбросить</button></div><p id="ivExperimentText"></p><p class="muted">Меняется только фиолетовая кривая и её дельта. Котировки исполнения, капитал, P&amp;L игры и рыночная траектория остаются прежними.</p></div></details>
+<details class="card" id="autoFold"><summary>Автовыход <span id="autoMini">выключен</span></summary><div class="fold-body"><label class="check"><input type="checkbox" id="autoEnabled"> Закрыть всё при достижении цели</label><label>Цель от пикового занятого капитала, %<input id="autoTarget" type="number" value="20" min="0.01" max="10000" step="1"></label><button id="applyAuto">Применить настройки</button><p class="muted">Проверяется P&amp;L после модельных Bid/Ask и комиссий полного закрытия. При нулевой базе ROI не вычисляется. После выхода оба автомата выключаются.</p></div></details>
+</div>
+<details class="card" id="historyFold"><summary>История рынка <span>только уже пройденные 15-минутные моменты</span></summary><svg id="historyChart" viewBox="0 0 1100 190" role="img" aria-label="Уже пройденная история цены"></svg></details>
+<details class="card" id="riskFold"><summary>Подробно о капитале и риске</summary><div id="riskDetails" class="fold-body"></div></details>
+<details class="card" id="journalFold"><summary>Журнал и воспроизведение <span id="journalMini"></span></summary><div class="fold-body"><div class="button-row"><button id="report">Текстовый отчёт</button><button id="saveSession">Сохранить партию JSON</button><button id="loadSession">Воспроизвести партию JSON</button><input id="sessionFile" type="file" accept=".json,application/json" hidden></div><p class="muted">«Переиграть тот же рынок» начинает новую попытку с исходного пресета. JSON восстанавливает всю партию с теми же решениями и проверяет её контрольную сумму.</p><textarea id="reportText" rows="12" readonly hidden aria-label="Текстовый отчёт"></textarea><div class="table-scroll"><table><thead><tr><th>Момент</th><th>Источник</th><th>Действие</th><th>Цена</th><th>Комиссия</th><th>P&amp;L после пакета</th><th>Занято после пакета</th></tr></thead><tbody id="journal"></tbody></table></div></div></details>
+<details class="card" id="helpFold"><summary>Как устроена модель</summary><div class="fold-body help"><p><b>Как читать экран.</b> «Весь счёт» показывает весь депозит и результат игры. «Действующая позиция» — только открытые объёмы. Теоретическая цена — текущая оценка модели; сделки проходят по Bid/Ask с комиссией. Delta показывает приблизительное изменение стоимости при росте цены актива на 1, Gamma — изменение самой Delta. Галочки у ног включают учебный просмотр; они не закрывают сделки.</p><p>Один опцион и один FUT относятся к одной единице условного актива. Европейские опционы имеют общую дату экспирации. Модель Black–76 с нулевой ставкой; цена условного базового актива трактуется как форвардная. CALL − PUT = F − K при одинаковой IV. Funding, дивиденды, финансирование и досрочное исполнение не моделируются.</p><p>На каждом 15-минутном шаге стоимость пересчитывается с новым оставшимся сроком. Theta — производная этой цены по течению календарного времени, а не дополнительная комиссия. На экспирации остаётся только внутренняя стоимость, автоматический расчёт без спреда и отдельной комиссии.</p><p>Случайный рынок создаётся последовательно, без заранее заданного финала: смена режимов, диффузия и редкие скачки. Цена и IV синтетические. Генератор не подбирается по прибыли конструкции. Графики P&amp;L — условная переоценка при других ценах в тот же момент, не показ будущего.</p><p>Реализованный результат = результат закрытых объёмов минус все уже уплаченные комиссии; нереализованный = переоценка открытого объёма по средней модели. «При закрытии» дополнительно вычитает предполагаемые спреды и комиссии закрытия. На графике каждой ноге приписаны её собственные издержки; сумма ног точно равна итогу.</p><p>Занятый капитал = положительный оставшийся нетто-дебет опционов + модельное ГО опционов + 20% номинала FUT. Для ограниченных обязательств ГО — максимальная отрицательная выплата опционов при S≥0 без учёта полученной премии. Для неограниченного верхнего риска — стрессовый резерв в диапазоне 50–150% текущей цены, минимум 20% номинала чистого короткого CALL-объёма в верхнем хвосте выплат. Это не максимальный убыток и не биржевое ГО. Комиссии уже отражены в P&amp;L и повторно в капитал не включаются.</p><p>Максимальный убыток на экспирации считается отдельно по точному кусочно-линейному профилю, со всеми прошлыми сделками и комиссиями. Условный актив не может иметь отрицательную цену. Просадка измеряется по стоимости депозита при закрытии на каждом пройденном 15-минутном шаге.</p><p>Пресеты — только стартовые пакеты. PUT-зигзаг: +PUT ATM / −PUT ниже / длинный FUT до начальной Δ≈0; CALL-зигзаг: +CALL ATM / −CALL выше / короткий FUT до Δ≈0. Они сохраняют риск за дальним страйком и не являются ограниченными вертикальными спредами.</p><p>Автоматы только два: Delta Bot и автовыход. Полное ручное закрытие выключает оба, чтобы они не открывали позицию повторно. При переходе на сутки проходят все промежуточные 15-минутные проверки. Комиссия опциона — 0,05 за контракт/сторону, FUT — 0,05% номинала/сторону; параметры отчёта фиксируют модель.</p><p class="muted">Версия модели: universal-1.0.0 · генератор markov-gbm-1. Автономный файл, без запросов в интернет.</p></div></details>
+</section><footer>Учебная среда: синтетические цены, модельные спреды и условный капитал.</footer>
+</div>
+<dialog id="setup"><form id="setupForm"><div class="dialog-head"><div><h2>Новая игра</h2><p class="muted">Новый рынок начинается с выбранной цены. Его будущее будет открываться по ходу игры.</p></div><button type="button" id="cancelSetup" aria-label="Закрыть настройки">×</button></div>
+<div class="three"><label>Начальная цена<input id="startPrice" type="number" value="100" min="1" step="any" required></label><label>Экспирация<select id="days"><option value="7">7 дней</option><option value="14" selected>14 дней</option><option value="30">30 дней</option></select></label><label>Начальная IV, %<input id="startIV" type="number" value="60" min="5" max="300" step="1" required></label>
+<label>Рыночная волатильность<select id="volMode"><option value="calm">Спокойная</option><option value="normal" selected>Обычная</option><option value="high">Высокая</option><option value="random">Случайная смена</option></select></label><label>Депозит<input id="startDeposit" type="number" value="10000" min="1" step="any" required></label><label>Шаг страйков<input id="strikeStep" type="number" value="5" min="0.01" step="any" required></label>
+<label>Стартовая конструкция<select id="preset"></select></label><label>Базовое количество<input id="quantity" type="number" value="10" min="1" max="10000" step="1" list="sizes" required><datalist id="sizes"><option value="10"><option value="20"></datalist></label><label>Лимит занятости, %<input id="limitPct" type="number" value="10" min="0.01" max="1000" step="any" required></label></div>
+<div class="seed-input"><label>Seed рынка<input id="seed" maxlength="200" required></label><button type="button" id="randomSeed">Случайный seed</button><label>Ориентир на входе, %<input id="allocationPct" type="number" value="5" min="0.01" max="100" step="any"></label></div>
+<section id="presetPreview" class="preset-preview"></section><div id="setupError" class="error" role="alert"></div><div class="dialog-bottom"><span class="muted">5% — ориентир, а не изменение депозита или размера заявки.</span><button class="primary" type="submit">Начать игру</button></div></form></dialog>
+<script>/* Standalone arbitrary-position engine. No DOM, no preset-specific accounting. */
+const TrainerCore = (() => {
+  'use strict';
+  const VERSION='universal-1.0.0', MARKET_VERSION='markov-gbm-1';
+  const STEP_DAYS=1/96, EPS=1e-9;
+  const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+  const copy=x=>JSON.parse(JSON.stringify(x));
+  const sum=a=>a.reduce((x,y)=>x+y,0);
+  const pdf=x=>Math.exp(-x*x/2)/Math.sqrt(2*Math.PI);
+  function cdf(z){
+    const a=Math.abs(z),t=1/(1+.2316419*a);
+    const p=pdf(a)*t*(.319381530+t*(-.356563782+t*(1.781477937+t*(-1.821255978+t*1.330274429))));
+    return z>=0?1-p:p;
+  }
+  function price(type,F,K,iv,days){
+    if(!['call','put'].includes(type)||!(F>=0)||!(K>0)||!Number.isFinite(F+K+iv+days))throw Error('Некорректные параметры опциона');
+    const intrinsic=type==='call'?Math.max(0,F-K):Math.max(0,K-F);
+    if(days<=0||F===0){
+      return {mid:intrinsic,delta:type==='call'?(F>K?1:F===K?.5:0):(F<K?-1:F===K?-.5:0),gamma:0,theta:0,vega:0};
+    }
+    const T=days/365,sigma=Math.max(.0001,iv),w=sigma*Math.sqrt(T);
+    const d1=(Math.log(F/K)+w*w/2)/w,d2=d1-w;
+    const call=F*cdf(d1)-K*cdf(d2);
+    return {mid:clamp(type==='call'?call:call-F+K,intrinsic,type==='call'?F:K),
+      delta:type==='call'?cdf(d1):cdf(d1)-1,gamma:pdf(d1)/(F*w),
+      theta:-F*pdf(d1)*sigma/(2*Math.sqrt(T)*365),vega:F*pdf(d1)*Math.sqrt(T)/100};
+  }
+  const defaults={startPrice:100,days:14,iv:.6,volMode:'normal',seed:'',preset:'bull_call',quantity:10,
+    strikeStep:5,deposit:10000,allocationPct:5,limitPct:10,optFee:.05,futFee:.0005,
+    optSpreadAbs:.01,optSpreadRate:.015,futSpreadRate:.0002,futMargin:.2};
+  function config(input={}){
+    const c={...defaults,...input};c.seed=String(c.seed);
+    const limits={startPrice:[1,1000000],iv:[.05,3],quantity:[1,10000],strikeStep:[.01,100000],
+      deposit:[1,1e12],allocationPct:[.01,100],limitPct:[.01,1000],optFee:[0,100],futFee:[0,.01],
+      optSpreadAbs:[0,100],optSpreadRate:[0,.25],futSpreadRate:[0,.01],futMargin:[0,1]};
+    for(const [k,[a,b]] of Object.entries(limits)){
+      c[k]=Number(c[k]);if(!Number.isFinite(c[k])||c[k]<a||c[k]>b)throw Error('Недопустимый параметр '+k);
+    }
+    if(![7,14,30].includes(Number(c.days)))throw Error('Срок должен быть 7, 14 или 30 дней');c.days=Number(c.days);
+    if(!Number.isInteger(c.quantity))throw Error('Количество опционов должно быть целым');
+    if(c.strikeStep>=c.startPrice/4)throw Error('Шаг страйков должен быть меньше четверти начальной цены');
+    if(!['calm','normal','high','random'].includes(c.volMode))throw Error('Неизвестный режим волатильности');
+    if(!c.seed||c.seed.length>200)throw Error('Seed должен содержать 1–200 символов');
+    return c;
+  }
+  function quote(type,K,ctx,c){
+    if(type==='future'){
+      const half=ctx.days<=0?0:ctx.price*c.futSpreadRate;
+      return {mid:ctx.price,bid:Math.max(0,ctx.price-half),ask:ctx.price+half,delta:1,gamma:0,theta:0,vega:0,iv:ctx.iv};
+    }
+    const p=price(type,ctx.price,K,ctx.iv,ctx.days);
+    const intrinsic=type==='call'?Math.max(0,ctx.price-K):Math.max(0,K-ctx.price);
+    const half=ctx.days<=0?0:c.optSpreadAbs+c.optSpreadRate*p.mid;
+    return {...p,bid:Math.max(intrinsic,p.mid-half),ask:Math.max(p.mid,Math.min(type==='call'?ctx.price:K,p.mid+half)),iv:ctx.iv};
+  }
+  function newBook(){return {legs:[],fees:0,premiumPaid:0,premiumReceived:0,optionCash:0,seq:0};}
+  const key=o=>o.type==='future'?'FUT':o.type+':'+Number(o.strike).toFixed(8);
+  const active=b=>b.legs.filter(p=>Math.abs(p.qty)>EPS);
+  function validateOrder(o){
+    if(!['call','put','future'].includes(o.type)||!Number.isFinite(o.qty)||Math.abs(o.qty)<EPS||Math.abs(o.qty)>1e7)throw Error('Некорректная заявка');
+    if(o.type!=='future'&&(!(o.strike>0)||!Number.isFinite(o.strike)||!Number.isInteger(o.qty)))throw Error('Нужен положительный страйк и целое число опционов');
+    if(o.type==='future'&&Math.abs(o.qty*100-Math.round(o.qty*100))>1e-7)throw Error('Шаг FUT — 0,01 единицы');
+  }
+  function fill(book,order,ctx,c,reason='manual',settlement=false){
+    validateOrder(order);
+    if(ctx.days<=0&&!settlement)throw Error('Экспирация завершена; начните новую игру');
+    const q=quote(order.type,order.strike,ctx,c),px=settlement?q.mid:order.qty>0?q.ask:q.bid;
+    if(order.limit!=null&&!settlement){
+      if(!Number.isFinite(order.limit)||order.limit<0)throw Error('Некорректная лимитная цена');
+      if(order.qty>0?px>order.limit+EPS:px<order.limit-EPS)throw Error('Лимит не достигнут по текущему Bid/Ask; заявка не исполнена');
+    }
+    const fee=settlement?0:Math.abs(order.qty)*(order.type==='future'?px*c.futFee:c.optFee);
+    let p=book.legs.find(p=>p.key===key(order));
+    if(!p){p={key:key(order),type:order.type,strike:order.type==='future'?null:order.strike,qty:0,avg:0,realizedGross:0,fees:0};book.legs.push(p);}
+    const old=p.qty;
+    if(Math.abs(old)<EPS||Math.sign(old)===Math.sign(order.qty)){
+      p.avg=(Math.abs(old)*p.avg+Math.abs(order.qty)*px)/(Math.abs(old)+Math.abs(order.qty));p.qty=old+order.qty;
+    } else {
+      const closed=Math.min(Math.abs(old),Math.abs(order.qty));
+      p.realizedGross+=closed*Math.sign(old)*(px-p.avg);p.qty=old+order.qty;
+      if(Math.abs(p.qty)<EPS){p.qty=0;p.avg=0;}else if(Math.sign(p.qty)!==Math.sign(old))p.avg=px;
+    }
+    p.fees+=fee;book.fees+=fee;
+    if(order.type!=='future'){
+      const flow=-order.qty*px;book.optionCash+=flow;
+      if(flow<0)book.premiumPaid-=flow;else book.premiumReceived+=flow;
+    }
+    return {id:++book.seq,tick:ctx.tick,type:order.type,strike:p.strike,qty:order.qty,fill:px,
+      bid:q.bid,ask:q.ask,mid:q.mid,iv:ctx.iv,price:ctx.price,days:ctx.days,fee,reason,settlement};
+  }
+  function component(p,ctx,c,kind='mark',ivShift=0){
+    const scenario={...ctx,iv:clamp(ctx.iv+ivShift,.0001,5)};
+    const q=quote(p.type,p.strike,kind==='expiry'?{...scenario,days:0}:scenario,c);
+    const px=kind==='liquidation'?(p.qty>0?q.bid:q.ask):q.mid;
+    const exitFee=kind==='liquidation'&&ctx.days>0?Math.abs(p.qty)*(p.type==='future'?px*c.futFee:c.optFee):0;
+    return p.realizedGross+p.qty*(px-p.avg)-p.fees-exitFee;
+  }
+  function pnl(book,ctx,c,kind='mark',ivShift=0){return sum(book.legs.map(p=>component(p,ctx,c,kind,ivShift)));}
+  function greeks(book,ctx){
+    const out={delta:0,gamma:0,theta:0,vega:0};
+    for(const p of active(book)){
+      const x=p.type==='future'?{delta:1,gamma:0,theta:0,vega:0}:price(p.type,ctx.price,p.strike,ctx.iv,ctx.days);
+      for(const k of Object.keys(out))out[k]+=p.qty*x[k];
+    }return out;
+  }
+  function terminalBounds(book,ctx,c){
+    const strikes=[...new Set(active(book).filter(p=>p.type!=='future').map(p=>p.strike))].sort((a,b)=>a-b);
+    const points=[0,...strikes],vals=points.map(price=>pnl(book,{...ctx,price,days:0},c,'expiry'));
+    const rightSlope=sum(active(book).filter(p=>p.type==='call'||p.type==='future').map(p=>p.qty));
+    const min=rightSlope<-EPS?-Infinity:Math.min(...vals),max=rightSlope>EPS?Infinity:Math.max(...vals);
+    const roots=[],intervals=[];
+    for(let i=0;i<points.length;i++){
+      const a=points[i],v=vals[i];
+      if(Math.abs(v)<1e-7)roots.push(a);
+      if(i<points.length-1){
+        const b=points[i+1],w=vals[i+1];
+        if(Math.abs(v)<1e-7&&Math.abs(w)<1e-7)intervals.push([a,b]);
+        else if(v*w<0)roots.push(a-v*(b-a)/(w-v));
+      } else if(Math.abs(rightSlope)>EPS){const r=a-v/rightSlope;if(r>a+EPS)roots.push(r);}
+      else if(Math.abs(v)<1e-7)intervals.push([a,Infinity]);
+    }
+    return {min,max,maxLoss:Math.max(0,-min),maxProfit:Math.max(0,max),rightSlope,strikes,
+      breakEvens:roots.filter((x,i,a)=>a.findIndex(y=>Math.abs(x-y)<1e-6)===i),zeroIntervals:intervals};
+  }
+  function capital(book,ctx,c){
+    const options=active(book).filter(p=>p.type!=='future'),futures=active(book).filter(p=>p.type==='future');
+    const debit=Math.max(0,sum(options.map(p=>p.qty*p.avg)));
+    const optionPayoff=S=>sum(options.map(p=>p.qty*(p.type==='call'?Math.max(0,S-p.strike):Math.max(0,p.strike-S))));
+    const tail=sum(options.filter(p=>p.type==='call').map(p=>p.qty));
+    const points=tail<-EPS?[ctx.price*.5,ctx.price*1.5,...options.map(p=>p.strike).filter(k=>k>=ctx.price*.5&&k<=ctx.price*1.5)]:[0,...options.map(p=>p.strike)];
+    let optionMargin=options.length?Math.max(0,-Math.min(...points.map(optionPayoff))):0;
+    if(tail<-EPS)optionMargin=Math.max(optionMargin,-tail*ctx.price*.2);
+    const futureMargin=sum(futures.map(p=>Math.abs(p.qty)*ctx.price*c.futMargin));
+    return {debit,optionMargin,futureMargin,margin:optionMargin+futureMargin,used:debit+optionMargin+futureMargin};
+  }
+  function hash(text){let h=2166136261;for(let i=0;i<text.length;i++){h^=text.charCodeAt(i);h=Math.imul(h,16777619);}return h>>>0;}
+  function uniform(m){m.rng=(m.rng+0x6D2B79F5)>>>0;let t=m.rng;t=Math.imul(t^(t>>>15),t|1);t^=t+Math.imul(t^(t>>>7),t|61);return ((t^(t>>>14))>>>0)/4294967296;}
+  const normal=m=>Math.sqrt(-2*Math.log(Math.max(1e-12,uniform(m))))*Math.cos(2*Math.PI*uniform(m));
+  function newMarket(c){return {rng:hash(MARKET_VERSION+'|'+c.seed),price:c.startPrice,iv:c.iv,tick:0,regime:0};}
+  function nextMarket(m,c){
+    if(uniform(m)<.012)m.regime=Math.floor(uniform(m)*5)-2;
+    const base={calm:.3,normal:.6,high:1,random:.6}[c.volMode];
+    const modeMultiplier=c.volMode==='random'?[.55,.85,1,1.35,1.8][m.regime+2]:1;
+    const sigma=base*modeMultiplier,dt=STEP_DAYS/365;
+    const jump=uniform(m)<.0015?normal(m)*.055:0;
+    const jumpCompensation=.0015*(Math.exp(.055*.055/2)-1);
+    m.price=Math.max(c.startPrice*.00001,m.price*Math.exp((m.regime*.45-sigma*sigma/2)*dt-jumpCompensation+sigma*Math.sqrt(dt)*normal(m)+jump));
+    const target=clamp(c.iv*(.75+.25*sigma/base),.05,2.5);
+    m.iv=clamp(m.iv+.035*(target-m.iv)+normal(m)*.003,.05,3);
+    m.tick++;return m;
+  }
+  const context=g=>({price:g.market.price,iv:g.market.iv,days:Math.max(0,g.config.days-g.market.tick*STEP_DAYS),tick:g.market.tick});
+  const presets=[
+    ['blank','Чистый лист'],['long_call','Купленный CALL'],['long_put','Купленный PUT'],['short_call','Проданный CALL'],['short_put','Проданный PUT'],
+    ['bull_call','Бычий CALL-спред'],['bear_put','Медвежий PUT-спред'],['bull_put','Бычий PUT-спред'],['bear_call','Медвежий CALL-спред'],
+    ['long_straddle','Купленный стрэддл'],['short_straddle','Проданный стрэддл'],['long_strangle','Купленный стрэнгл'],['short_strangle','Проданный стрэнгл'],
+    ['call_butterfly','Long Butterfly CALL'],['put_butterfly','Long Butterfly PUT'],['short_butterfly','Short Butterfly CALL'],
+    ['iron_butterfly','Iron Butterfly'],['iron_condor','Iron Condor'],['long_iron_condor','Long Iron Condor'],['condor','Обычный CALL Condor'],
+    ['bull_put_zigzag','Бычий PUT-зигзаг'],['bear_call_zigzag','Медвежий CALL-зигзаг']
+  ];
+  function presetOrders(c){
+    if(!presets.some(p=>p[0]===c.preset))throw Error('Неизвестный пресет');
+    const a=Math.round(c.startPrice/c.strikeStep)*c.strikeStep,w=c.strikeStep,n=c.quantity;
+    const call=(x,q)=>({type:'call',strike:+(a+x*w).toFixed(8),qty:q*n});
+    const put=(x,q)=>({type:'put',strike:+(a+x*w).toFixed(8),qty:q*n});
+    const up=Math.floor((c.startPrice-a)/w+1e-9)+1,down=Math.ceil((c.startPrice-a)/w-1e-9)-1;
+    const map={blank:[],long_call:[call(up,1)],long_put:[put(down,1)],short_call:[call(up,-1)],short_put:[put(down,-1)],
+      bull_call:[call(up,1),call(up+1,-1)],bear_put:[put(down,1),put(down-1,-1)],bull_put:[put(down,-1),put(down-1,1)],bear_call:[call(up,-1),call(up+1,1)],
+      long_straddle:[call(0,1),put(0,1)],short_straddle:[call(0,-1),put(0,-1)],long_strangle:[put(down,1),call(up,1)],short_strangle:[put(down,-1),call(up,-1)],
+      call_butterfly:[call(-1,1),call(0,-2),call(1,1)],put_butterfly:[put(-1,1),put(0,-2),put(1,1)],short_butterfly:[call(-1,-1),call(0,2),call(1,-1)],
+      iron_butterfly:[put(-1,1),put(0,-1),call(0,-1),call(1,1)],
+      iron_condor:[put(-2,1),put(-1,-1),call(1,-1),call(2,1)],long_iron_condor:[put(-2,-1),put(-1,1),call(1,1),call(2,-1)],
+      condor:[call(-1,1),call(0,-1),call(1,-1),call(2,1)],
+      bull_put_zigzag:[put(0,1),put(-3,-1)],bear_call_zigzag:[call(0,1),call(3,-1)]};
+    const orders=map[c.preset];
+    if(c.preset.endsWith('_zigzag')){
+      // Same option orientations as v3.9. Hedge to zero initially; FUT sign is
+      // positive for the long near-put spread, negative for the long near-call.
+      const d=sum(orders.map(o=>o.qty*price(o.type,c.startPrice,o.strike,c.iv,c.days).delta));
+      const q=Math.round(-d*100)/100;if(Math.abs(q)>EPS)orders.push({type:'future',qty:q});
+    }return orders;
+  }
+  function metrics(g){
+    const ctx=context(g),cap=capital(g.book,ctx,g.config),mark=pnl(g.book,ctx,g.config),net=pnl(g.book,ctx,g.config,'liquidation');
+    const realized=sum(g.book.legs.map(p=>p.realizedGross-p.fees));
+    return {...cap,mark,net,realized,unrealized:mark-realized,closingCosts:mark-net,
+      equity:g.config.deposit+net,free:g.config.deposit+net-cap.used,peak:g.peak,
+      roi:g.peak>EPS?net/g.peak:null,depositReturn:net/g.config.deposit,
+      ...greeks(g.book,ctx),bounds:terminalBounds(g.book,ctx,g.config)};
+  }
+  function observe(g){
+    const cap=capital(g.book,context(g),g.config);g.peak=Math.max(g.peak,cap.used);
+    const m=metrics(g);g.highWater=Math.max(g.highWater,m.equity);
+    g.maxDrawdown=Math.max(g.maxDrawdown,g.highWater-m.equity);
+    g.maxDrawdownPct=Math.max(g.maxDrawdownPct,(g.highWater-m.equity)/g.highWater);
+    return m;
+  }
+  function batch(g,orders,reason,settlement=false){
+    // Validate all fills on a clone, then commit atomically. Preset assembly and
+    // close-all do not create a fictitious temporary naked-position peak.
+    const next=copy(g.book),ctx=context(g),records=orders.map(o=>fill(next,o,ctx,g.config,reason,settlement));
+    g.book=next;const m=observe(g);
+    for(const r of records)g.journal.push({...r,pnlAfterBatch:m.net,capitalAfterBatch:m.used,deltaAfterBatch:m.delta});
+    return records;
+  }
+  function newGame(input){
+    const c=config(input),g={version:VERSION,config:c,market:newMarket(c),book:newBook(),peak:0,
+      highWater:c.deposit,maxDrawdown:0,maxDrawdownPct:0,history:[],actions:[],journal:[],
+      bot:{enabled:false,target:0,step:.4,tolerance:.5,lastTick:-1},auto:{enabled:false,targetPct:20},ended:false};
+    batch(g,presetOrders(c),'preset');g.initialCapital=g.peak;
+    const m=observe(g);g.history.push({tick:0,price:g.market.price,iv:g.market.iv,pnl:m.net,used:m.used});
+    return g;
+  }
+  function closeOrders(g){return active(g.book).map(p=>({type:p.type,strike:p.strike,qty:-p.qty}));}
+  function botTick(g){
+    if(!g.bot.enabled||g.bot.lastTick===g.market.tick||g.ended)return;
+    g.bot.lastTick=g.market.tick;
+    const d=greeks(g.book,context(g)).delta,diff=g.bot.target-d;
+    if(Math.abs(diff)<=g.bot.tolerance+EPS)return;
+    const amount=Math.floor((Math.min(Math.abs(diff),g.bot.step)+1e-10)*100)/100;
+    if(amount<.01)return;
+    batch(g,[{type:'future',qty:Math.sign(diff)*amount}],'delta_bot');
+  }
+  function autoTick(g){
+    if(!g.auto.enabled||g.ended||!active(g.book).length||g.peak<=EPS)return false;
+    const m=metrics(g);if(m.net/g.peak+EPS<g.auto.targetPct/100)return false;
+    batch(g,closeOrders(g),'auto_exit');g.auto.enabled=false;g.bot.enabled=false;return true;
+  }
+  function advance(g,steps,marketStep=nextMarket){
+    if(!Number.isInteger(steps)||steps<1||steps>2880)throw Error('Некорректный шаг времени');
+    for(let i=0;i<steps&&!g.ended;i++){
+      marketStep(g.market,g.config);observe(g);
+      if(context(g).days<=EPS){batch(g,closeOrders(g),'expiry',true);g.ended=true;g.bot.enabled=false;g.auto.enabled=false;}
+      else if(!autoTick(g)){botTick(g);autoTick(g);}
+      const m=observe(g);g.history.push({tick:g.market.tick,price:g.market.price,iv:g.market.iv,pnl:m.net,used:m.used});
+    }
+  }
+  function act(g,a,record=true){
+    if(!a||typeof a.type!=='string')throw Error('Некорректное действие');
+    if(record&&g.actions.length>=20000)throw Error('Достигнут лимит размера журнала');
+    const tick=g.market.tick;
+    if(a.type==='trade'){if(g.ended)throw Error('Игра завершена');batch(g,[a.order],'manual');}
+    else if(a.type==='close_leg'){
+      if(g.ended)throw Error('Игра завершена');const p=active(g.book).find(p=>p.key===a.key);
+      if(!p||!(a.amount>0)||a.amount>Math.abs(p.qty)+EPS)throw Error('Количество закрытия превышает открытую позицию');
+      batch(g,[{type:p.type,strike:p.strike,qty:-Math.sign(p.qty)*a.amount}],'close_leg');
+    }else if(a.type==='close_all'){if(g.ended)throw Error('Игра завершена');batch(g,closeOrders(g),'close_all');g.bot.enabled=false;g.auto.enabled=false;}
+    else if(a.type==='advance')advance(g,a.steps);
+    else if(a.type==='bot'){
+      const v=a.settings;
+      if(!v||!Number.isFinite(v.target)||Math.abs(v.target)>1e5||!(v.step>=.01&&v.step<=1e5)||!(v.tolerance>=0&&v.tolerance<=1e5))throw Error('Некорректные настройки Delta Bot');
+      g.bot={...g.bot,...v,enabled:!!v.enabled};
+    }else if(a.type==='auto'){
+      if(!a.settings||!(a.settings.targetPct>0&&a.settings.targetPct<=10000))throw Error('Некорректная цель автовыхода');
+      g.auto={enabled:!!a.settings.enabled,targetPct:a.settings.targetPct};
+    }else throw Error('Неизвестное действие');
+    if(record)g.actions.push({...copy(a),atTick:tick});observe(g);return g;
+  }
+  function preview(g,order){const clone=copy(g),before=metrics(g);act(clone,{type:'trade',order},false);return {before,after:metrics(clone),fill:clone.journal.at(-1)};}
+  function exportSession(g){
+    const state={book:g.book,market:g.market,peak:g.peak,maxDrawdown:g.maxDrawdown,bot:g.bot,auto:g.auto};
+    return {format:'option-trainer-session',version:VERSION,marketVersion:MARKET_VERSION,config:copy(g.config),actions:copy(g.actions),
+      digest:hash(JSON.stringify(state)).toString(16),currentTick:g.market.tick};
+  }
+  function replay(session){
+    if(session?.format!=='option-trainer-session'||session.version!==VERSION||session.marketVersion!==MARKET_VERSION||!Array.isArray(session.actions)||session.actions.length>20000)throw Error('Неподдерживаемый файл партии');
+    const g=newGame(session.config);let total=0;
+    for(const a of session.actions){if(a.atTick!==g.market.tick)throw Error('Нарушен порядок действий');if(a.type==='advance')total+=a.steps;if(total>10000)throw Error('Слишком много шагов');act(g,a);}
+    if(exportSession(g).digest!==session.digest)throw Error('Контроль партии не совпал; импорт отменён');return g;
+  }
+  return Object.freeze({VERSION,MARKET_VERSION,STEP_DAYS,EPS,defaults,config,price,quote,newBook,fill,active,pnl,component,
+    greeks,terminalBounds,capital,presets,presetOrders,newGame,context,metrics,observe,batch,advance,act,preview,exportSession,replay,copy,hash});
+})();
+if(typeof module!=='undefined'&&module.exports)module.exports=TrainerCore;
+</script><script>/* Pure snapshot valuation. Never advances a market, executes an order or runs a bot. */
+const TrainerScenario = (() => {
+  'use strict';
+  const C=typeof module!=='undefined'&&module.exports?require('./engine.js'):TrainerCore;
+  const DAY=86400000,MINUTE=60000;
+  function parseUTC(value){
+    if(typeof value!=='string'||!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(value))throw Error('Укажите дату и время UTC.');
+    const ms=Date.parse(value+':00Z');
+    if(!Number.isFinite(ms)||new Date(ms).toISOString().slice(0,16)!==value)throw Error('Некорректная дата UTC.');
+    return ms;
+  }
+  const utc=ms=>new Date(ms).toISOString().slice(0,16);
+  function optional(value,fallback,min,max,label){
+    if(value==null||String(value).trim()==='')return fallback;
+    const number=Number(String(value).trim().replace(',','.'));
+    if(!Number.isFinite(number)||number<min||number>max)throw Error(label);
+    return number;
+  }
+  function resolve(current,input){
+    const startMs=parseUTC(input.calendarStart),nowMs=startMs+current.tick*15*MINUTE;
+    const expiryMs=Math.round(nowMs+current.days*DAY);
+    let targetMs;
+    if(input.mode==='now')targetMs=nowMs;
+    else if(input.mode==='after'){
+      const days=optional(input.delayDays,0,0,30,'Дни: от 0 до 30.'),hours=optional(input.delayHours,0,0,23.75,'Часы: от 0 до 23,75.');
+      if(!Number.isInteger(days)||Math.abs(hours*4-Math.round(hours*4))>1e-9)throw Error('Дни — целые, часы — с шагом 0,25 (15 минут).');
+      targetMs=nowMs+days*DAY+hours*60*MINUTE;
+    }else if(input.mode==='date')targetMs=parseUTC(input.targetDate);
+    else throw Error('Выберите момент оценки сценария.');
+    if(targetMs<nowMs)throw Error('Дата сценария раньше текущего игрового момента.');
+    if(targetMs>expiryMs)throw Error('Сценарий выходит за экспирацию: '+utc(expiryMs).replace('T',' ')+' UTC.');
+    const price=optional(input.price,current.price,0,1e9,'Цена должна быть от 0 до 1 000 000 000.');
+    const iv=optional(input.ivPercent,current.iv*100,.01,500,'IV должна быть от 0,01% до 500%.')/100;
+    return {startMs,nowMs,expiryMs,targetMs,delayDays:(targetMs-nowMs)/DAY,
+      context:{...current,price,iv,days:Math.max(0,(expiryMs-targetMs)/DAY),tick:(targetMs-startMs)/(15*MINUTE)}};
+  }
+  function evaluate(book,ctx,config){
+    const settled=ctx.days<=0;
+    return {net:C.pnl(book,ctx,config,'liquidation'),mark:C.pnl(book,ctx,config,'mark'),
+      greeks:settled?{delta:0,gamma:0,theta:0,vega:0}:C.greeks(book,ctx),settled};
+  }
+  return Object.freeze({parseUTC,utc,resolve,evaluate});
+})();
+if(typeof module!=='undefined'&&module.exports)module.exports=TrainerScenario;
+</script><script>(() => {
+  'use strict';
+  const C=TrainerCore,W=TrainerScenario,$=id=>document.getElementById(id);
+  const fmt=(x,n=2)=>Number.isFinite(x)?x.toLocaleString('ru-RU',{minimumFractionDigits:n,maximumFractionDigits:n}):'—';
+  const signed=(x,n=2)=>(x>=0?'+':'−')+fmt(Math.abs(x),n);
+  const percent=x=>x==null?'—':signed(x*100)+'%';
+  const esc=s=>String(s).replace(/[&<>"']/g,x=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[x]));
+  const n=id=>{const s=$(id).value.trim().replace(',','.');if(!s||!Number.isFinite(Number(s)))throw Error('Заполните числовое поле: '+$(id).closest('label')?.textContent.trim());return Number(s);};
+  const set=(id,v)=>{$(id).textContent=v;};
+  const color=(id,x)=>{$(id).classList.toggle('positive',x>1e-8);$(id).classList.toggle('negative',x<-1e-8);};
+  const freshSeed=()=>{const a=new Uint32Array(2);crypto.getRandomValues(a);return Array.from(a,x=>x.toString(36)).join('-');};
+  const elapsed=t=>{const mins=t*15;return Math.floor(mins/1440)+' д '+String(Math.floor(mins%1440/60)).padStart(2,'0')+':'+String(mins%60).padStart(2,'0');};
+  const sourceLabel={preset:'Старт',manual:'Вручную',close_leg:'Закрытие ноги',close_all:'Закрыть всё',delta_bot:'Delta Bot',auto_exit:'Автовыход',expiry:'Экспирация'};
+  const name=p=>p.type==='future'?'FUT':p.type.toUpperCase()+' '+fmt(p.strike,2);
+  const colors=['#7583b1','#bb718c','#639c95','#b49d66','#9180b0','#71a1bb','#c18b72','#788d67','#a58675','#8a9da9'];
+  let game=C.newGame({...C.defaults,seed:freshSeed()}),ivShift=0,selectedLegs=new Set(),chartRange=[60,140],busy=false;
+  let pnlFrame=null,deltaFrame=null,hoverPrice=null,deltaHoverPrice=null,excludedLegs=new Set();
+  let wiResolved=null,wiPnlFrame=null,wiDeltaFrame=null,wiHover=null,wiDeltaHover=null;
+  const wiFields={mode:'wiMode',delayDays:'wiDays',delayHours:'wiHours',targetDate:'wiDate',price:'wiPrice',ivPercent:'wiIV',calendarStart:'wiCalendarStart'};
+  const readWhatIf=()=>Object.fromEntries(Object.entries(wiFields).map(([key,id])=>[key,$(id).value]));
+  function resetWhatIf(preserveCalendar=false){
+    const start=preserveCalendar&&$('wiCalendarStart').value||new Date().toISOString().slice(0,10)+'T00:00';
+    $('wiCalendarStart').value=start;$('wiMode').value='after';$('wiDays').value=5;$('wiHours').value=0;$('wiPrice').value='';$('wiIV').value='';
+    $('wiDate').value=W.utc(W.parseUTC(start)+Math.min(5,game.config.days)*86400000);wiHover=null;wiDeltaHover=null;
+  }
+  function selectWorkspace(whatif){
+    $('trainerPanel').hidden=whatif;$('whatIfPanel').hidden=!whatif;
+    for(const [id,selected] of [['trainerTab',!whatif],['whatIfTab',whatif]]){$(id).setAttribute('aria-selected',String(selected));$(id).tabIndex=selected?0:-1;}
+    if(whatif)renderWhatIf();else renderCharts();
+  }
+  function sessionExport(){return {...C.exportSession(game),view:{version:1,whatIf:readWhatIf(),excludedLegs:[...excludedLegs]}};}
+  const viewBook=()=>({...game.book,legs:game.book.legs.filter(p=>!excludedLegs.has(p.key))});
+  const viewBounds=()=>C.terminalBounds(viewBook(),C.context(game),game.config);
+  try{if(localStorage.getItem('option-trainer-theme')==='dark')document.documentElement.dataset.theme='dark';}catch{}
+  function message(text,error=false){set('message',text);$('message').classList.toggle('error',error);}
+  function attempt(fn){try{fn();}catch(e){message(e.message,true);}}
+  function tradeOrder(){
+    const type=$('asset').value,qty=n('tradeQty');if(qty<=0)throw Error('Количество должно быть положительным');
+    const order={type,qty:qty*($('tradeSide').value==='buy'?1:-1)};
+    if(type!=='future')order.strike=n('strike');
+    if($('limit').value.trim())order.limit=n('limit');return order;
+  }
+  function tradeQuote(){
+    const fut=$('asset').value==='future';$('strike').disabled=fut;$('tradeQty').step=fut?'.01':'1';$('tradeQty').min=fut?'.01':'1';
+    const buy=$('tradeSide').value==='buy';
+    for(const id of ['tradeSide','execute']){$(id).classList.toggle('side-buy',buy);$(id).classList.toggle('side-sell',!buy);}
+    try{
+      const x=C.context(game),q=C.quote($('asset').value,fut?null:n('strike'),x,game.config);
+      $('quote').innerHTML='Bid <b>'+fmt(q.bid,4)+'</b> · Ask <b>'+fmt(q.ask,4)+'</b><br>Mid '+fmt(q.mid,4)+' · '+(fut?'линейный FUT':'IV '+fmt(x.iv*100,1)+'% · Θ '+signed(q.theta,4)+'/сутки');
+    }catch{$('quote').textContent='Укажите положительный страйк.';}
+  }
+  function doAction(action,success){
+    C.act(game,action);render();message(success||'Изменения применены.');
+  }
+  function previewTrade(){
+    const p=C.preview(game,tradeOrder()),a=p.after,b=p.before;
+    $('tradePreview').innerHTML='Цена '+fmt(p.fill.fill,4)+' · комиссия '+fmt(p.fill.fee,4)+'<br>Занято '+fmt(b.used)+' → <b>'+fmt(a.used)+'</b> · ГО '+fmt(a.margin)+'<br>Δ '+signed(b.delta,3)+' → '+signed(a.delta,3)+'<br>P&L при закрытии '+signed(b.net)+' → '+signed(a.net)+(a.used/game.config.deposit*100>game.config.limitPct?'<br><span class="negative">Выше предупредительного лимита; исполнение разрешено.</span>':'');
+    message('Примерка выполнена. Позиции, капитал и рынок игры не изменены.');
+  }
+  function range(){
+    const x=C.context(game),b=viewBounds(),points=[x.price*.65,x.price*1.35,...b.strikes,...b.breakEvens.filter(v=>v>0)];
+    let lo=Math.max(0,Math.min(...points)*.92),hi=Math.max(...points)*1.08;
+    if(hi-lo<game.config.startPrice*.1){lo=Math.max(0,x.price*.7);hi=x.price*1.3;}chartRange=[lo,hi];
+    return chartRange;
+  }
+  function svgFrame(svg,series,{height=340,zero=true,priceLine=true,xlabel=true}={}){
+    const mobile=xlabel&&matchMedia('(max-width:600px)').matches;
+    if(mobile)height=svg===$('deltaChart')?520:600;
+    const W=900,H=height,p={l:mobile?78:58,r:18,t:mobile?30:17,b:xlabel?(mobile?130:80):15},[lo,hi]=chartRange;
+    if(xlabel)svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
+    const vals=series.flatMap(s=>s.points.map(v=>v[1])).filter(Number.isFinite);
+    let yl=Math.min(zero?0:Infinity,...vals),yh=Math.max(zero?0:-Infinity,...vals);
+    if(yh-yl<1e-6){yl-=1;yh+=1;}const pad=(yh-yl)*.12;yl-=pad;yh+=pad;
+    const X=v=>p.l+(v-lo)/(hi-lo)*(W-p.l-p.r),Y=v=>H-p.b-(v-yl)/(yh-yl)*(H-p.t-p.b);
+    const css=getComputedStyle(document.documentElement),ink=css.getPropertyValue('--muted').trim(),line=css.getPropertyValue('--line').trim();
+    let out='';
+    for(let i=0;i<=4;i++){
+      const y=yl+(yh-yl)*i/4,py=Y(y);out+=`<line x1="${p.l}" y1="${py}" x2="${W-p.r}" y2="${py}" stroke="${line}" stroke-width=".7"/><text x="${p.l-8}" y="${py+3}" text-anchor="end" fill="${ink}" font-size="${mobile?21:10}">${fmt(y,Math.abs(y)>100?0:1)}</text>`;
+    }
+    if(zero&&yl<=0&&yh>=0)out+=`<line x1="${p.l}" y1="${Y(0)}" x2="${W-p.r}" y2="${Y(0)}" stroke="${ink}" stroke-width="1"/>`;
+    if(xlabel){const ticks=mobile?3:6;for(let i=0;i<=ticks;i++){const v=lo+(hi-lo)*i/ticks;out+=`<text x="${X(v)}" y="${H-(mobile?95:62)}" text-anchor="middle" fill="${ink}" font-size="${mobile?21:10}">${fmt(v,hi-lo>100?0:1)}</text>`;}}
+    if(svg===$('pnlChart')||svg===$('wiPnlChart')){
+      const b=viewBounds();
+      for(const [i,k] of b.strikes.entries())out+=`<line x1="${X(k)}" y1="${p.t}" x2="${X(k)}" y2="${H-p.b}" stroke="${line}" stroke-dasharray="2 3"/><text x="${X(k)}" y="${p.t+(i%2)*(mobile?19:10)}" text-anchor="middle" fill="${ink}" font-size="${mobile?16:9}">K ${fmt(k,1)}</text>`;
+      for(const bE of b.breakEvens)if(bE>=lo&&bE<=hi)out+=`<circle cx="${X(bE)}" cy="${Y(0)}" r="3" fill="var(--card)" stroke="var(--green)" stroke-width="1.5"/>`;
+    }
+    for(const s of series){const d=s.points.filter(v=>Number.isFinite(v[1])).map((v,i)=>(i?'L':'M')+X(v[0]).toFixed(2)+','+Y(v[1]).toFixed(2)).join(' ');out+=`<path d="${d}" fill="none" stroke="${s.color}" stroke-width="${s.width||1.7}" ${s.dash?'stroke-dasharray="'+s.dash+'"':''}/>`;}
+    if(priceLine){const S=C.context(game).price,px=X(S);out+=`<line class="current-price-line" x1="${px}" y1="${p.t}" x2="${px}" y2="${H-p.b}" stroke="var(--orange)" stroke-dasharray="3 4" stroke-width="1"/>`;
+      if(xlabel){const label='Цена '+fmt(S),width=Math.max(82,label.length*(mobile?12:6)+16),left=Math.max(2,Math.min(W-width-2,px-width/2)),y=H-(mobile?38:24);
+        out+=`<path d="M${px-4},${y} L${px},${y-4} L${px+4},${y}" fill="var(--orange)"/><rect x="${left}" y="${y}" width="${width}" height="${mobile?32:20}" rx="4" fill="var(--orange)"/><text class="current-price-label" x="${left+width/2}" y="${H-(mobile?15:10)}" text-anchor="middle" fill="var(--card)" font-size="${mobile?21:11}" font-weight="600">${esc(label)}</text>`;}
+    }
+    if(xlabel)out+='<g class="chart-cursor" pointer-events="none"></g>';
+    svg.innerHTML=out;return {X,Y,lo,hi,left:p.l,right:W-p.r,top:p.t,bottom:H-p.b,height:H,width:W,mobile};
+  }
+  function drawCursor(svg,frame,S,points){
+    const group=svg.querySelector('.chart-cursor');if(S===null){group.innerHTML='';return;}
+    const px=frame.X(S),scale=Math.max(.4,svg.getScreenCTM()?.a||1),font=Math.min(28,Math.max(13,12/scale)),h=font+12,gap=5;
+    const labels=points.map(p=>{const label=p.label+' '+signed(p.value,p.digits??2),w=Math.min(frame.right-frame.left,label.length*font*.59+20),py=frame.Y(p.value);
+      return {...p,label,w,py,x:Math.max(frame.left,Math.min(frame.right-w,px+10)),y:Math.max(frame.top,Math.min(frame.bottom-h,py-h-10))};
+    }).sort((a,b)=>a.y-b.y);
+    // Keep boxes distinct even when the curves coincide; leaders retain the exact points.
+    for(let i=1;i<labels.length;i++)labels[i].y=Math.max(labels[i].y,labels[i-1].y+h+gap);
+    const overflow=Math.max(0,labels.at(-1).y+h-frame.bottom);for(const p of labels)p.y-=overflow;
+    for(let i=labels.length-2;i>=0;i--)labels[i].y=Math.min(labels[i].y,labels[i+1].y-h-gap);
+    let out=`<line class="cursor-line" x1="${px}" x2="${px}" y1="${frame.top}" y2="${frame.bottom}" stroke="var(--ink)" stroke-dasharray="4 3"/>`;
+    for(const p of labels){const anchorX=Math.max(p.x,Math.min(p.x+p.w,px)),anchorY=p.py>p.y+h?p.y+h:p.py<p.y?p.y:Math.max(p.y,Math.min(p.y+h,p.py));
+      out+=`<path d="M${px},${p.py} L${anchorX},${anchorY}" stroke="${p.color}" fill="none" stroke-width="1"/><circle class="cursor-point" cx="${px}" cy="${p.py}" r="4" fill="var(--card)" stroke="${p.color}" stroke-width="2"/><g class="cursor-label"><rect x="${p.x}" y="${p.y}" width="${p.w}" height="${h}" rx="5" fill="var(--card)" stroke="${p.color}"/><text x="${p.x+10}" y="${p.y+h/2}" dominant-baseline="middle" font-size="${font}" font-weight="600" fill="${p.color}">${esc(p.label)}</text></g>`;
+    }
+    const priceLabel='Курсор '+fmt(S),w=priceLabel.length*font*.59+16,left=Math.max(2,Math.min(frame.width-w-2,px-w/2));
+    out+=`<rect x="${left}" y="${frame.height-(frame.mobile?76:54)}" width="${w}" height="${frame.mobile?32:24}" rx="4" fill="var(--ink)"/><text class="cursor-price-label" x="${left+w/2}" y="${frame.height-(frame.mobile?60:42)}" dominant-baseline="middle" text-anchor="middle" font-size="${font}" fill="var(--card)">${esc(priceLabel)}</text>`;
+    group.innerHTML=out;
+  }
+  function renderChartReadout(){
+    if(!pnlFrame)return;
+    const selected=hoverPrice!==null,S=selected?Math.max(pnlFrame.lo,Math.min(pnlFrame.hi,hoverPrice)):C.context(game).price;
+    const ctx={...C.context(game),price:S},book=viewBook(),current=C.pnl(book,ctx,game.config,'liquidation'),expiry=C.pnl(book,ctx,game.config,'expiry'),shifted=C.pnl(book,ctx,game.config,'liquidation',ivShift);
+    set('hoverMode',selected?'Цена под курсором':'Текущая цена актива');set('hoverPrice',fmt(S));
+    set('hoverCurrent',signed(current));set('hoverExpiry',signed(expiry));set('hoverMark',signed(C.pnl(book,ctx,game.config,'mark')));
+    $('hoverIVBox').hidden=ivShift===0;set('hoverIV',signed(shifted));
+    const points=[{label:'Сейчас',value:current,color:'var(--orange)'},{label:'Экспирация',value:expiry,color:'var(--navy)'}];
+    if(ivShift)points.push({label:'IV',value:shifted,color:'var(--purple)'});
+    drawCursor($('pnlChart'),pnlFrame,selected?S:null,points);
+  }
+  function renderDeltaReadout(){
+    if(!deltaFrame)return;const selected=deltaHoverPrice!==null,S=selected?Math.max(deltaFrame.lo,Math.min(deltaFrame.hi,deltaHoverPrice)):C.context(game).price;
+    const ctx={...C.context(game),price:S},book=viewBook(),delta=C.greeks(book,ctx).delta,shifted=C.greeks(book,{...ctx,iv:Math.max(.0001,ctx.iv+ivShift)}).delta;
+    set('deltaHoverMode',selected?'Цена под курсором':'Текущая цена актива');set('deltaHoverPrice',fmt(S));set('deltaHoverValue',signed(delta,3));
+    $('deltaHoverIVBox').hidden=ivShift===0;set('deltaHoverIV',signed(shifted,3));
+    const points=[{label:'Δ',value:delta,digits:3,color:'var(--navy)'}];if(ivShift)points.push({label:'Δ IV',value:shifted,digits:3,color:'var(--purple)'});
+    drawCursor($('deltaChart'),deltaFrame,selected?S:null,points);
+  }
+  function renderCharts(){
+    const ctx=C.context(game),book=viewBook(),[lo,hi]=range(),grid=Array.from({length:241},(_,i)=>lo+(hi-lo)*i/240);
+    const values=(kind,shift=0)=>grid.map(S=>[S,C.pnl(book,{...ctx,price:S},game.config,kind,shift)]);
+    const series=[{points:values('mark'),color:'var(--muted)',width:1},
+      {points:values('expiry'),color:'var(--navy)',dash:'6 4',width:2},
+      {points:values('liquidation'),color:'var(--orange)',width:2.4}];
+    if(ivShift)series.push({points:values('liquidation',ivShift),color:'var(--purple)',width:2});
+    if($('showLegs').checked)book.legs.forEach((p,i)=>{
+      if(selectedLegs.has(p.key))series.unshift({points:grid.map(S=>[S,C.component(p,{...ctx,price:S},game.config,'liquidation')]),color:colors[i%colors.length],width:1});
+    });
+    pnlFrame=svgFrame($('pnlChart'),series);renderChartReadout();
+    const dg=[{points:grid.map(S=>[S,C.greeks(book,{...ctx,price:S}).delta]),color:'var(--navy)',width:2}];
+    if(ivShift)dg.push({points:grid.map(S=>[S,C.greeks(book,{...ctx,price:S,iv:Math.max(.0001,ctx.iv+ivShift)}).delta]),color:'var(--purple)',dash:'4 3'});
+    deltaFrame=svgFrame($('deltaChart'),dg,{height:280});renderDeltaReadout();
+    const b=viewBounds(),breakevens=b.breakEvens.map(v=>fmt(v)).join(' · ');
+    set('breakEvens',!C.active(book).length?'В просмотре нет открытых позиций. Линии сохраняют учтённый реализованный результат.':
+      'Страйки: '+b.strikes.map(v=>fmt(v,1)).join(' · ')+' | Безубыточности на экспирации: '+(breakevens||'нет')+(b.zeroIntervals.length?' · нулевой P&L на '+b.zeroIntervals.map(([a,z])=>'['+fmt(a)+'; '+(Number.isFinite(z)?fmt(z):'∞')+']').join(', '):'')+'.');
+    $('ivLegend').hidden=ivShift===0;
+    set('ivMini',ivShift?signed(ivShift*100,0)+' п.п. · только эксперимент':'без изменения игры');
+    set('ivShiftLabel',signed(ivShift*100,0)+' п.п.');
+    set('ivExperimentText','Для включённых ног при текущей цене и IV '+fmt(Math.max(.0001,ctx.iv+ivShift)*100,1)+'%: при закрытии '+signed(C.pnl(book,ctx,game.config,'liquidation',ivShift))+'; изменение '+signed(C.pnl(book,ctx,game.config,'liquidation',ivShift)-C.pnl(book,ctx,game.config,'liquidation'))+'.');
+    const h=game.history,oldRange=chartRange;
+    chartRange=[0,Math.max(1,game.market.tick)];
+    svgFrame($('historyChart'),[{points:h.map(x=>[x.tick,x.price]),color:'var(--navy)',width:1.5}],{height:190,zero:false,priceLine:false,xlabel:false});
+    $('historyChart').innerHTML+=`<text x="58" y="187" font-size="10" fill="var(--muted)">Старт</text><text x="882" y="187" text-anchor="end" font-size="10" fill="var(--muted)">${esc(elapsed(game.market.tick))} · ${game.history.length} известных моментов</text>`;
+    chartRange=oldRange;
+  }
+  function renderLegControls(){
+    $('legControls').hidden=!$('showLegs').checked;
+    $('legControls').innerHTML=viewBook().legs.map((p,i)=>`<label class="check" style="color:${colors[i%colors.length]}"><input type="checkbox" data-leg="${esc(p.key)}" ${selectedLegs.has(p.key)?'checked':''}>${esc(name(p))}${p.qty===0?' (закрыто)':''}</label>`).join('');
+  }
+  function renderWhatIf(){
+    if($('whatIfPanel').hidden)return;
+    const input=readWhatIf(),ctx=C.context(game),book=viewBook();
+    $('wiAfter').hidden=input.mode!=='after';$('wiDateBox').hidden=input.mode!=='date';
+    $('wiPrice').placeholder='Текущая: '+fmt(ctx.price);$('wiIV').placeholder='Текущая: '+fmt(ctx.iv*100,2)+'%';
+    set('wiScope',excludedLegs.size?'Просмотр без '+excludedLegs.size+' выбранных ног. Изменить состав можно галочками во вкладке «Тренажёр».':'В расчёте все ноги текущей конструкции и накопленный результат закрытых объёмов.');
+    try{
+      if(['wiDays','wiHours','wiPrice','wiIV'].some(id=>$(id).validity.badInput))throw Error('Завершите ввод числового значения.');
+      const start=W.parseUTC(input.calendarStart),now=start+ctx.tick*900000,end=Math.round(now+ctx.days*86400000);
+      $('wiDate').min=W.utc(now);$('wiDate').max=W.utc(end);
+      set('wiCalendarInfo','Сейчас: '+W.utc(now).replace('T',' ')+' UTC · экспирация: '+W.utc(end).replace('T',' ')+' UTC.');
+      wiResolved=W.resolve(ctx,input);
+    }catch(e){wiResolved=null;wiPnlFrame=null;wiDeltaFrame=null;$('wiResults').hidden=true;$('wiError').hidden=false;set('wiError',e.message);return;}
+    $('wiError').hidden=true;set('wiError','');$('wiResults').hidden=false;
+    const sc=wiResolved.context,result=W.evaluate(book,sc,game.config),baseline=C.pnl(book,ctx,game.config,'liquidation');
+    const condition=W.utc(wiResolved.targetMs).replace('T',' ')+' UTC · осталось '+fmt(sc.days,3)+' сут. · IV '+fmt(sc.iv*100,2)+'% · точка '+fmt(sc.price);
+    set('wiConditions',condition);set('wiPnlLegend','What if: '+condition);set('wiDeltaLegend','What if: '+condition);
+    set('wiResultPrice',fmt(sc.price));set('wiResultNet',signed(result.net));set('wiResultChange',signed(result.net-baseline));
+    set('wiResultDelta',signed(result.greeks.delta,3));set('wiResultGamma',signed(result.greeks.gamma,4));set('wiResultTheta',signed(result.greeks.theta,3));
+    color('wiResultNet',result.net);color('wiResultChange',result.net-baseline);
+    set('wiSettlementNote',result.settled?'Экспирация: опционы выплачивают внутреннюю стоимость, FUT рассчитан по цене сценария. Временной стоимости и открытых позиций после расчёта нет; Delta, Gamma и Theta равны нулю.':'P&L включает накопленный результат, уплаченные комиссии и предполагаемые Bid/Ask и комиссии закрытия. Время входит в цену каждой ноги; Theta отдельно не списывается.');
+    const savedRange=chartRange,[baseLo,baseHi]=range();chartRange=[Math.max(0,Math.min(baseLo,sc.price*.92)),Math.max(baseHi,sc.price*1.08)];
+    const [lo,hi]=chartRange,grid=Array.from({length:241},(_,i)=>lo+(hi-lo)*i/240);
+    const scenario=grid.map(price=>[price,W.evaluate(book,{...sc,price},game.config)]);
+    wiPnlFrame=svgFrame($('wiPnlChart'),[
+      {points:grid.map(price=>[price,C.pnl(book,{...ctx,price},game.config,'expiry')]),color:'var(--navy)',dash:'6 4'},
+      {points:grid.map(price=>[price,C.pnl(book,{...ctx,price},game.config,'liquidation')]),color:'var(--orange)',width:2},
+      {points:scenario.map(([price,r])=>[price,r.net]),color:'var(--whatif)',width:2.8,dash:'9 3'}],{height:430});
+    wiDeltaFrame=svgFrame($('wiDeltaChart'),[
+      {points:grid.map(price=>[price,C.greeks(book,{...ctx,price}).delta]),color:'var(--navy)',width:2},
+      {points:scenario.map(([price,r])=>[price,r.greeks.delta]),color:'var(--whatif)',width:2.8,dash:'9 3'}],{height:430});
+    for(const [id,frame,value] of [['wiPnlChart',wiPnlFrame,result.net],['wiDeltaChart',wiDeltaFrame,result.greeks.delta]]){
+      const x=frame.X(sc.price),y=frame.Y(value);$(id).insertAdjacentHTML('beforeend',`<g class="scenario-point" pointer-events="none"><line x1="${x}" x2="${x}" y1="${frame.top}" y2="${frame.bottom}" stroke="var(--whatif)" stroke-dasharray="2 5"/><circle cx="${x}" cy="${y}" r="6" fill="var(--card)" stroke="var(--whatif)" stroke-width="3"/></g>`);
+    }
+    chartRange=savedRange;renderWhatIfCursor(false);renderWhatIfCursor(true);
+  }
+  function renderWhatIfCursor(isDelta){
+    if(!wiResolved)return;const frame=isDelta?wiDeltaFrame:wiPnlFrame,hover=isDelta?wiDeltaHover:wiHover;if(!frame)return;
+    const price=hover===null?wiResolved.context.price:Math.max(frame.lo,Math.min(frame.hi,hover)),ctx={...C.context(game),price},sc={...wiResolved.context,price},book=viewBook(),r=W.evaluate(book,sc,game.config);
+    set(isDelta?'wiDeltaMode':'wiHoverMode',hover===null?'Цена сценария':'Цена под курсором');
+    let points;
+    if(isDelta){const current=C.greeks(book,ctx).delta;set('wiDeltaPrice',fmt(price));set('wiDeltaCurrent',signed(current,3));set('wiDeltaValue',signed(r.greeks.delta,3));
+      points=[{label:'Δ сейчас',value:current,digits:3,color:'var(--navy)'},{label:'Δ What if',value:r.greeks.delta,digits:3,color:'var(--whatif)'}];
+    }else{const current=C.pnl(book,ctx,game.config,'liquidation'),expiry=C.pnl(book,ctx,game.config,'expiry');
+      set('wiHoverPrice',fmt(price));set('wiHoverCurrent',signed(current));set('wiHoverNet',signed(r.net));set('wiHoverExpiry',signed(expiry));
+      points=[{label:'Сейчас',value:current,color:'var(--orange)'},{label:'Экспирация',value:expiry,color:'var(--navy)'},{label:'What if',value:r.net,color:'var(--whatif)'}];
+    }
+    drawCursor($(isDelta?'wiDeltaChart':'wiPnlChart'),frame,hover===null?null:price,points);
+  }
+  function renderPositions(){
+    const ctx=C.context(game),a=C.active(game.book).slice().sort((a,b)=>
+      Number(a.type==='future')-Number(b.type==='future')||b.strike-a.strike||a.type.localeCompare(b.type));
+    $('positions').innerHTML=a.length?a.map(p=>{
+      const q=C.quote(p.type,p.strike,ctx,game.config),closing=C.component(p,ctx,game.config,'liquidation'),included=!excludedLegs.has(p.key);
+      return `<tr class="position-row ${p.qty>0?'position-long':'position-short'} ${included?'':'position-excluded'}" data-key="${esc(p.key)}" data-strike="${p.strike??''}" data-type="${p.type}"><td><label class="check position-name"><input type="checkbox" data-include="${esc(p.key)}" aria-label="Включить ${esc(name(p))} в просмотр" ${included?'checked':''}>${esc(name(p))}</label></td><td>${signed(p.qty,2)}</td><td>${fmt(p.avg,4)}</td><td class="position-theory">${fmt(q.mid,4)}</td><td class="position-volume" title="${p.type==='future'?'Номинал FUT':'Теоретическая стоимость опционов'}">${fmt(Math.abs(p.qty)*q.mid)}</td><td>${signed(p.qty*q.delta,3)}</td><td>${signed(p.qty*q.gamma,4)}</td><td>${signed(p.qty*q.theta,3)}</td><td class="position-pnl ${closing>=0?'positive':'negative'}">${signed(closing)}</td><td><input aria-label="Закрыть ${esc(name(p))}: количество" data-closeqty="${esc(p.key)}" type="number" value="${Math.abs(p.qty)}" step="${p.type==='future'?'.01':'1'}" min="${p.type==='future'?'.01':'1'}" max="${Math.abs(p.qty)}"><button class="small" data-close="${esc(p.key)}">Закрыть</button></td></tr>`;
+    }).join(''):'<tr><td class="empty" colspan="10">'+(game.ended?'Экспирация завершена. Открытых позиций нет; итог сохранён.':game.book.legs.length?'Все позиции закрыты. Реализованный результат сохранён; можно собрать новую конструкцию.':'Чистый лист: добавьте любые CALL, PUT или FUT через торговую панель.')+'</td></tr>';
+    const openKeys=new Set(a.map(p=>p.key)),closed=game.book.legs.filter(p=>!openKeys.has(p.key));
+    if(closed.length){const value=closed.reduce((v,p)=>v+C.component(p,ctx,game.config,'liquidation'),0);
+      $('positions').innerHTML+=`<tr class="closed-result"><th colspan="8" scope="row">Результат полностью закрытых ног</th><td id="closedLegPnl" class="${value>=0?'positive':'negative'}">${signed(value)}</td><td>—</td></tr>`;
+    }
+    const book=viewBook(),m=C.greeks(book,ctx),net=C.pnl(book,ctx,game.config,'liquidation');
+    $('greeks').innerHTML=`<span>Δ <b>${signed(m.delta,3)}</b></span><span>Γ ${signed(m.gamma,4)}</span><span>Θ/сутки ${signed(m.theta,3)}</span><span>Vega/1 п.п. ${signed(m.vega,3)}</span>`;
+    set('totalDelta',signed(m.delta,3));set('totalGamma',signed(m.gamma,4));set('totalTheta',signed(m.theta,3));set('totalPnl',signed(net));color('totalPnl',net);
+    set('positionTotalLabel',excludedLegs.size?'Итого в просмотре':'Итого по игре');set('deltaMini','Δ '+signed(m.delta,3)+(excludedLegs.size?' · просмотр':''));
+    $('scenarioBanner').hidden=excludedLegs.size===0;
+    set('scenarioStats','Исключено ног: '+excludedLegs.size+' · P&L при закрытии '+signed(net)+' · Δ '+signed(m.delta,3)+' · занято в сценарии '+fmt(C.capital(book,ctx,game.config).used)+'.');
+  }
+  function renderDesk(){
+    const ctx=C.context(game),active=C.active(game.book).filter(p=>p.type!=='future'),step=game.config.strikeStep;
+    const atm=Math.max(step,Math.round(ctx.price/step)*step),near=Array.from({length:17},(_,i)=>Number((atm+(i-8)*step).toFixed(8))).filter(k=>k>0);
+    const strikes=[...new Set([...near,...active.map(p=>p.strike)])].sort((a,b)=>b-a);
+    const holding=(type,k)=>active.find(p=>p.type===type&&p.strike===k)?.qty||0;
+    const position=qty=>`<td class="${qty>0?'positive':qty<0?'negative':'muted'}">${qty?'<b>'+signed(qty,0)+'</b><small>'+ (qty>0?'куплено':'продано')+'</small>':'—'}</td>`;
+    const button=(type,strike,side,value)=>{
+      const attrs=`data-desk-type="${type}" data-desk-strike="${strike}" data-desk-side="${side}" ${game.ended?'disabled':''}`,instrument=type.toUpperCase()+' '+fmt(strike);
+      return `<td class="desk-order"><button class="desk-quote ${side==='buy'?'side-buy':'side-sell'}" ${attrs} data-desk-action="execute" aria-label="${side==='buy'?'Купить':'Продать'} ${instrument} сразу"><span>${side==='buy'?'Купить':'Продать'}</span><b>${fmt(value,4)}</b></button><button class="desk-preview" ${attrs} data-desk-action="preview" aria-label="Примерить ${side==='buy'?'покупку':'продажу'} ${instrument}">Примерить</button></td>`;
+    };
+    $('deskRows').innerHTML=strikes.map(k=>{
+      const call=C.quote('call',k,ctx,game.config),put=C.quote('put',k,ctx,game.config),cq=holding('call',k),pq=holding('put',k);
+      return `<tr data-strike="${k}" class="${k===atm?'desk-atm ':''}${cq||pq?'desk-held':''}">${position(cq)}<td>${signed(call.delta,3)}</td>${button('call',k,'sell',call.bid)}${button('call',k,'buy',call.ask)}<td class="desk-theory" data-theory="call">${fmt(call.mid,4)}</td><th scope="row" class="desk-strike">${fmt(k)}${k===atm?'<small>ATM</small>':''}</th><td class="desk-theory" data-theory="put">${fmt(put.mid,4)}</td>${button('put',k,'sell',put.bid)}${button('put',k,'buy',put.ask)}<td>${signed(put.delta,3)}</td>${position(pq)}</tr>`;
+    }).join('');
+    set('deskMini',game.ended?'экспирация завершена':active.length+' открытых опционных ног · IV '+fmt(ctx.iv*100,1)+'%');
+    set('deskContext','Цена '+fmt(ctx.price)+' · IV '+fmt(ctx.iv*100,1)+'% · до общей экспирации '+fmt(ctx.days,2)+' суток · шаг страйков '+fmt(step));
+    $('deskQty').disabled=game.ended;
+  }
+  function renderRisk(){
+    const m=C.metrics(game),c=game.config,x=C.context(game);
+    const openReturn=m.used>1e-9?m.unrealized/m.used:null;
+    set('activeCount','Открыто инструментов: '+C.active(game.book).length);
+    const fields={deposit:fmt(c.deposit),equity:fmt(m.equity),allocation:fmt(c.deposit*c.allocationPct/100)+' ('+fmt(c.allocationPct,1)+'%)',used:fmt(m.used),peak:fmt(gPeak()),
+      free:fmt(m.free),margin:fmt(m.margin),realized:signed(m.realized),unrealized:signed(m.unrealized),openReturn:percent(openReturn),net:signed(m.net),
+      roi:percent(m.roi),depositReturn:percent(m.depositReturn),drawdown:fmt(game.maxDrawdown)+' / '+fmt(game.maxDrawdownPct*100,2)+'%'};
+    for(const [id,v] of Object.entries(fields))set(id,v);
+    for(const id of ['realized','unrealized','net'])color(id,m[id]);
+    color('free',m.free);color('roi',m.roi||0);color('depositReturn',m.depositReturn);color('openReturn',openReturn||0);
+    const warn=m.used/c.deposit*100>c.limitPct+1e-8;
+    set('capitalWarning',m.free<0?'Резерв отрицательный · сделки доступны':warn?'Занято выше лимита '+fmt(c.limitPct,1)+'% · только предупреждение':'');
+    const risk=[['Премии уплачены за всю игру',fmt(game.book.premiumPaid)],['Премии получены за всю игру',fmt(game.book.premiumReceived)],
+      ['Оставшийся нетто-дебет',fmt(m.debit)],['ГО опционов',fmt(m.optionMargin)],['ГО FUT',fmt(m.futureMargin)],
+      ['Все уплаченные комиссии',fmt(game.book.fees)],['Предполагаемые расходы закрытия',fmt(m.closingCosts)],
+      ['Макс. убыток на экспирации',Number.isFinite(m.bounds.maxLoss)?fmt(m.bounds.maxLoss):'Не ограничен'],
+      ['Макс. прибыль на экспирации',Number.isFinite(m.bounds.maxProfit)?fmt(m.bounds.maxProfit):'Не ограничена'],
+      ['Занято / депозит',fmt(m.used/c.deposit*100,2)+'%'],['Капитал при старте',fmt(game.initialCapital)],
+      ['Стресс сейчас: цена −20%',signed(C.pnl(game.book,{...x,price:x.price*.8},c,'liquidation'))],
+      ['Стресс сейчас: цена +20%',signed(C.pnl(game.book,{...x,price:x.price*1.2},c,'liquidation'))],
+      ['Стресс сейчас: цена −50%',signed(C.pnl(game.book,{...x,price:x.price*.5},c,'liquidation'))],
+      ['Стресс сейчас: цена +50%',signed(C.pnl(game.book,{...x,price:x.price*1.5},c,'liquidation'))]];
+    $('riskDetails').innerHTML='<div class="risk-detail-grid">'+risk.map(([k,v])=>'<div><span class="muted">'+k+'</span><b>'+v+'</b></div>').join('')+'</div><p class="muted">Стрессы удерживают текущие время и IV. Свободный резерв = депозит + P&L при закрытии − занятый капитал. Максимальный убыток относится ко всей истории текущей партии и открытому остатку.</p>';
+  }
+  const gPeak=()=>game.peak;
+  function renderJournal(){
+    set('journalMini',game.journal.length+' исполнений · '+game.actions.length+' решений');
+    $('journal').innerHTML=game.journal.slice(-250).reverse().map(r=>`<tr><td>${esc(elapsed(r.tick))}</td><td>${sourceLabel[r.reason]||esc(r.reason)}</td><td>${r.qty>0?'Купить':'Продать'} ${fmt(Math.abs(r.qty),2)} ${esc(name(r))}</td><td>${fmt(r.fill,4)}</td><td>${fmt(r.fee,4)}</td><td>${signed(r.pnlAfterBatch)}</td><td>${fmt(r.capitalAfterBatch)}</td></tr>`).join('')||'<tr><td colspan="7" class="empty">Сделок пока нет.</td></tr>';
+    const bot=game.journal.filter(r=>r.reason==='delta_bot');
+    set('botStats','Сделок: '+bot.length+' · Оборот FUT: '+fmt(bot.reduce((s,r)=>s+Math.abs(r.qty),0))+' · Комиссии: '+fmt(bot.reduce((s,r)=>s+r.fee,0),4));
+  }
+  function render(){
+    hoverPrice=null;deltaHoverPrice=null;
+    const openKeys=new Set(C.active(game.book).map(p=>p.key));excludedLegs=new Set([...excludedLegs].filter(k=>openKeys.has(k)));
+    $('tradePreview').textContent='Нажмите «Примерить» для актуальной оценки заявки.';
+    const x=C.context(game);set('spot',fmt(x.price));set('priceChange',percent(x.price/game.config.startPrice-1));set('clock',elapsed(game.market.tick));
+    const minutes=Math.max(0,Math.round(x.days*1440));set('remaining',Math.floor(minutes/1440)+' д '+String(Math.floor(minutes%1440/60)).padStart(2,'0')+':'+String(minutes%60).padStart(2,'0'));
+    set('iv',fmt(x.iv*100,1)+'%');set('seedLabel',game.config.seed);$('seedLabel').title=game.config.seed;
+    set('gameState',game.ended?'Экспирация завершена':'Тренировка');
+    set('botMini',game.bot.enabled?'включён · цель '+signed(game.bot.target,2)+' ±'+fmt(game.bot.tolerance):'выключен');
+    set('autoMini',game.auto.enabled?'включён · '+fmt(game.auto.targetPct,1)+'%':'выключен');
+    $('botEnabled').checked=game.bot.enabled;$('autoEnabled').checked=game.auto.enabled;
+    document.querySelectorAll('[data-steps],#toExpiry,#execute,#closeAll,#preview,#applyBot,#applyAuto').forEach(b=>b.disabled=game.ended);
+    $('closeAll').disabled=game.ended||!C.active(game.book).length;
+    const a=Math.round(x.price/game.config.strikeStep)*game.config.strikeStep;
+    $('strikes').innerHTML=Array.from({length:31},(_,i)=>a+(i-15)*game.config.strikeStep).filter(k=>k>0).map(k=>'<option value="'+Number(k.toFixed(8))+'">').join('');
+    renderRisk();renderPositions();renderDesk();renderLegControls();renderCharts();tradeQuote();renderJournal();wiHover=null;wiDeltaHover=null;renderWhatIf();
+  }
+  function loadInputs(c){
+    const map={startPrice:'startPrice',days:'days',startIV:'iv',volMode:'volMode',startDeposit:'deposit',strikeStep:'strikeStep',preset:'preset',quantity:'quantity',limitPct:'limitPct',allocationPct:'allocationPct',seed:'seed'};
+    for(const [id,k] of Object.entries(map))$(id).value=id==='startIV'?c.iv*100:c[k];
+  }
+  function setupConfig(){return C.config({startPrice:n('startPrice'),days:n('days'),iv:n('startIV')/100,volMode:$('volMode').value,
+    seed:$('seed').value,preset:$('preset').value,quantity:n('quantity'),strikeStep:n('strikeStep'),deposit:n('startDeposit'),allocationPct:n('allocationPct'),limitPct:n('limitPct')});}
+  function presetPreview(){
+    try{const c=setupConfig(),g=C.newGame(c),m=C.metrics(g),orders=C.presetOrders(c);
+      const cost=g.book.premiumPaid-g.book.premiumReceived;
+      $('presetPreview').innerHTML='<b>'+esc(C.presets.find(p=>p[0]===c.preset)[1])+'</b> · общая экспирация через '+c.days+' суток'+
+        '<div class="formula">'+(orders.map(o=>signed(o.qty,2)+' '+name(o)).join(' / ')||'Нет позиций. Вы сами соберёте конструкцию.')+'</div>'+ 
+        (orders.length?'<div>Премии: '+(cost>=0?'дебет ':'кредит ')+fmt(Math.abs(cost))+' · комиссия '+fmt(g.book.fees)+' · занято '+fmt(m.used)+' · макс. убыток '+(Number.isFinite(m.bounds.maxLoss)?fmt(m.bounds.maxLoss):'не ограничен')+'</div>':'<div>Занятый капитал 0; ROI появится после первого положительного задействованного капитала.</div>')+
+        '<div class="muted">ATM — ближайший страйк. Отношения количеств заданы формулой. FUT в зигзагах округлён до 0,01.</div>';
+      set('setupError','');
+    }catch(e){set('presetPreview','Исправьте параметры для предварительного расчёта.');set('setupError',e.message);}
+  }
+  function newAttempt(c,preserveCalendar=false){
+    game=C.newGame(c);ivShift=0;$('ivShift').value=0;selectedLegs=new Set();excludedLegs=new Set();$('showLegs').checked=false;$('deskQty').value=1;set('deskStatus','');
+    $('botTarget').value=0;$('botStep').value=.4;$('botTolerance').value=.5;$('autoTarget').value=20;
+    $('strike').value=game.config.startPrice+game.config.strikeStep;$('tradeQty').value=1;$('limit').value='';
+    $('tradePreview').textContent='Примерка покажет влияние сделки до исполнения.';$('reportText').hidden=true;
+    resetWhatIf(preserveCalendar);selectWorkspace(false);render();message('Новая попытка. Рынок и IV раскрываются только по мере прохождения времени.');
+  }
+  function advance(steps){
+    if(busy||game.ended)return;busy=true;
+    try{const from=game.market.tick;C.act(game,{type:'advance',steps});render();message(game.ended?'Экспирация: опционы рассчитаны по внутренней стоимости, FUT закрыт. Итог сохранён.':'Пройдено '+(game.market.tick-from)*15+' минут. Все промежуточные 15-минутные шаги обработаны.');}
+    catch(e){message(e.message,true);}finally{busy=false;}
+  }
+  function textReport(){
+    const m=C.metrics(game),x=C.context(game),s=C.exportSession(game),c=game.config;
+    const out=['УНИВЕРСАЛЬНЫЙ ОПЦИОННЫЙ ТРЕНАЖЁР '+C.VERSION,'Синтетический учебный рынок; Black–76, r=0; множитель 1.',
+      'Рынок '+C.MARKET_VERSION+' | seed '+c.seed,'Статус: '+(game.ended?'экспирация завершена':'промежуточный отчёт, будущее не раскрывается'),
+      'Параметры: '+JSON.stringify(c),'Исходный пресет: '+C.presets.find(p=>p[0]===c.preset)[1],
+      'Стартовые заявки: '+C.presetOrders(c).map(o=>signed(o.qty,2)+' '+name(o)).join(' / '),
+      'Прошло: '+elapsed(game.market.tick)+' | F '+fmt(x.price,6)+' | IV '+fmt(x.iv*100,4)+'%',
+      'Абсолютный P&L при закрытии: '+signed(m.net,6),'Реализовано с комиссиями: '+signed(m.realized,6),
+      'Нереализовано по mid: '+signed(m.unrealized,6),'Предполагаемые расходы закрытия: '+fmt(m.closingCosts,6),
+      'ROI конструкции (на пик '+fmt(game.peak)+'): '+percent(m.roi),'Доходность всего депозита '+fmt(c.deposit)+': '+percent(m.depositReturn),
+      'Занятый капитал: '+fmt(m.used)+' | модельное ГО: '+fmt(m.margin)+' | свободный резерв: '+fmt(m.free),
+      'Начальное выделение: '+fmt(c.allocationPct)+'% — ориентир; лимит '+fmt(c.limitPct)+'% — предупреждение.',
+      'Макс. наблюдаемая просадка: '+fmt(game.maxDrawdown)+' / '+fmt(game.maxDrawdownPct*100)+'%',
+      'Уплачено премий: '+fmt(game.book.premiumPaid)+' | получено: '+fmt(game.book.premiumReceived)+' | комиссий: '+fmt(game.book.fees,6),
+      'Δ '+signed(m.delta,6)+' | Γ '+signed(m.gamma,6)+' | Θ/сутки '+signed(m.theta,6)+' | Vega/1 п.п. '+signed(m.vega,6),
+      'Delta Bot сейчас: '+JSON.stringify(game.bot),'Автовыход сейчас: '+JSON.stringify(game.auto),
+      '', 'ЖУРНАЛ ИСПОЛНЕНИЙ (пакеты атомарны)',
+      ...game.journal.map(r=>JSON.stringify(r)),'','ВСЕ РЕШЕНИЯ / ИЗМЕНЕНИЯ НАСТРОЕК',...game.actions.map(a=>JSON.stringify(a)),
+      '', 'Контроль полного воспроизведения: '+s.digest,
+      'Для точного повтора экспортируйте JSON партии. Новый запуск с тем же seed повторяет рынок, а не решения.'];
+    try{const scenario=W.resolve(x,readWhatIf());out.push('','WHAT IF — отдельная оценка, без сделок',JSON.stringify({parameters:readWhatIf(),excludedLegs:[...excludedLegs],scenario,result:W.evaluate(viewBook(),scenario.context,c)}));}catch(e){out.push('','What if: '+e.message);}
+    return out.join('\n');
+  }
+  function download(filename,text,type){const a=document.createElement('a'),url=URL.createObjectURL(new Blob([text],{type}));a.href=url;a.download=filename;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+  $('preset').innerHTML=C.presets.map(([id,label])=>'<option value="'+id+'">'+label+'</option>').join('');
+  $('newGame').onclick=()=>{loadInputs({...game.config,seed:freshSeed()});presetPreview();$('setup').showModal();};
+  $('cancelSetup').onclick=()=>$('setup').close();
+  $('randomSeed').onclick=()=>{$('seed').value=freshSeed();presetPreview();};
+  $('setupForm').oninput=presetPreview;$('setupForm').onchange=presetPreview;
+  $('setupForm').onsubmit=e=>{e.preventDefault();try{newAttempt(setupConfig());$('setup').close();}catch(err){set('setupError',err.message);}};
+  $('sameMarket').onclick=()=>attempt(()=>newAttempt({...game.config},true));
+  $('theme').onclick=()=>{document.documentElement.dataset.theme=document.documentElement.dataset.theme==='dark'?'light':'dark';try{localStorage.setItem('option-trainer-theme',document.documentElement.dataset.theme);}catch{}renderCharts();renderWhatIf();};
+  $('trainerTab').onclick=()=>selectWorkspace(false);$('whatIfTab').onclick=()=>selectWorkspace(true);
+  for(const id of ['trainerTab','whatIfTab'])$(id).onkeydown=e=>{if(['ArrowLeft','ArrowRight','Home','End'].includes(e.key)){e.preventDefault();const whatif=e.key==='End'||(e.key!=='Home'&&id==='trainerTab');selectWorkspace(whatif);$(whatif?'whatIfTab':'trainerTab').focus();}};
+  $('whatIfForm').onsubmit=e=>{e.preventDefault();renderWhatIf();};
+  $('whatIfForm').oninput=$('whatIfForm').onchange=()=>{wiHover=null;wiDeltaHover=null;renderWhatIf();};
+  $('wiReset').onclick=()=>{$('wiMode').value='now';$('wiDays').value=0;$('wiHours').value=0;$('wiPrice').value='';$('wiIV').value='';wiHover=null;wiDeltaHover=null;renderWhatIf();};
+  for(const id of ['asset','strike','tradeSide','tradeQty','limit'])$(id).addEventListener('input',()=>{tradeQuote();$('tradePreview').textContent='Нажмите «Примерить» для новой заявки.';});
+  $('preview').onclick=()=>attempt(previewTrade);
+  $('deskRows').onclick=e=>{const b=e.target.closest('[data-desk-type]');if(!b||game.ended)return;try{
+    const qty=n('deskQty');if(!Number.isInteger(qty)||qty<1||qty>10000)throw Error('Количество опционов — целое число от 1 до 10 000');
+    const {deskType:type,deskSide:side,deskAction:action}=b.dataset,strike=Number(b.dataset.deskStrike);
+    $('deskStatus').classList.remove('error');
+    if(action==='execute'){
+      doAction({type:'trade',order:{type,strike,qty:side==='buy'?qty:-qty}},'Сделка с доски исполнена в реальной игре по модельному Bid/Ask.');
+      set('deskStatus',(side==='buy'?'Куплено ':'Продано ')+qty+' '+type.toUpperCase()+' '+fmt(strike)+' · цена '+fmt(game.journal.at(-1).fill,4)+' · комиссия '+fmt(game.journal.at(-1).fee,4)+'.');
+      $('deskRows').querySelector(`[data-desk-type="${type}"][data-desk-strike="${strike}"][data-desk-side="${side}"][data-desk-action="execute"]`)?.focus({preventScroll:true});
+    }else{
+      $('asset').value=type;$('strike').value=strike;$('tradeSide').value=side;$('tradeQty').value=qty;$('limit').value='';
+      tradeQuote();previewTrade();set('deskStatus','Примерка готова в панели «Сделка». Позиция ещё не изменена.');$('preview').scrollIntoView({block:'center',behavior:'auto'});$('preview').focus({preventScroll:true});
+    }
+  }catch(err){set('deskStatus',err.message);$('deskStatus').classList.add('error');message(err.message,true);}};
+  $('execute').onclick=()=>attempt(()=>{doAction({type:'trade',order:tradeOrder()},'Сделка исполнена по текущему модельному Bid/Ask.');$('tradePreview').textContent='Сделка исполнена. Следующую заявку можно примерить отдельно.';});
+  $('closeAll').onclick=()=>attempt(()=>doAction({type:'close_all'},'Все позиции закрыты; реализованный результат и пик капитала сохранены. Оба автомата выключены.'));
+  $('positions').onclick=e=>{const button=e.target.closest('[data-close]');if(!button)return;attempt(()=>{const key=button.dataset.close,input=Array.from($('positions').querySelectorAll('[data-closeqty]')).find(x=>x.dataset.closeqty===key);doAction({type:'close_leg',key,amount:Number(input.value)},'Объём ноги закрыт. Остаток и накопленный результат пересчитаны.');});};
+  $('positions').onchange=e=>{const key=e.target.dataset.include;if(!key)return;if(e.target.checked)excludedLegs.delete(key);else excludedLegs.add(key);
+    render();message(excludedLegs.size?'Изменён только расчётный просмотр. Реальные позиции и сделки сохранены.':'Все ноги снова включены в просмотр.');
+  };
+  $('includeAll').onclick=()=>{excludedLegs.clear();render();message('Все ноги включены. Графики и итоги соответствуют реальной игре.');};
+  document.querySelectorAll('[data-steps]').forEach(b=>b.onclick=()=>advance(Number(b.dataset.steps)));
+  $('toExpiry').onclick=()=>advance(Math.max(1,game.config.days*96-game.market.tick));
+  $('applyBot').onclick=()=>attempt(()=>doAction({type:'bot',settings:{enabled:$('botEnabled').checked,target:n('botTarget'),step:n('botStep'),tolerance:n('botTolerance')}},'Delta Bot: настройки записаны; проверка на следующем 15-минутном шаге.'));
+  $('applyAuto').onclick=()=>attempt(()=>doAction({type:'auto',settings:{enabled:$('autoEnabled').checked,targetPct:n('autoTarget')}},'Настройки автовыхода записаны; проверка на следующем 15-минутном шаге.'));
+  $('ivShift').oninput=()=>{ivShift=Number($('ivShift').value)/100;renderCharts();};$('resetIV').onclick=()=>{ivShift=0;$('ivShift').value=0;renderCharts();};
+  $('showLegs').onchange=()=>{if($('showLegs').checked)selectedLegs=new Set(game.book.legs.map(p=>p.key));renderLegControls();renderCharts();};
+  $('legControls').onchange=e=>{const k=e.target.dataset.leg;if(k){if(e.target.checked)selectedLegs.add(k);else selectedLegs.delete(k);renderCharts();}};
+  $('resetRange').onclick=renderCharts;
+  function bindChartCursor(id,isDelta){
+    const svg=$(id),update=()=>isDelta?renderDeltaReadout():renderChartReadout(),assign=S=>{if(isDelta)deltaHoverPrice=S;else hoverPrice=S;update();};
+    const move=e=>{const frame=isDelta?deltaFrame:pnlFrame,matrix=svg.getScreenCTM();if(!matrix||!frame)return;
+      const point=svg.createSVGPoint();point.x=e.clientX;point.y=e.clientY;const p=point.matrixTransform(matrix.inverse());
+      if(p.x<frame.left||p.x>frame.right||p.y<frame.top||p.y>frame.bottom){if(e.pointerType!=='touch')assign(null);return;}
+      assign(frame.lo+(p.x-frame.left)/(frame.right-frame.left)*(frame.hi-frame.lo));
+    };
+    svg.onpointermove=move;svg.onpointerdown=e=>{move(e);if(e.pointerType==='touch')svg.setPointerCapture(e.pointerId);};
+    svg.onpointerleave=e=>{if(e.pointerType!=='touch')assign(null);};svg.onpointercancel=()=>assign(null);
+  }
+  bindChartCursor('pnlChart',false);bindChartCursor('deltaChart',true);
+  for(const [id,isDelta] of [['wiPnlChart',false],['wiDeltaChart',true]]){
+    const svg=$(id),clear=()=>{if(isDelta)wiDeltaHover=null;else wiHover=null;renderWhatIfCursor(isDelta);};
+    const move=e=>{const frame=isDelta?wiDeltaFrame:wiPnlFrame,matrix=svg.getScreenCTM();if(!matrix||!frame)return;const pt=svg.createSVGPoint();pt.x=e.clientX;pt.y=e.clientY;const p=pt.matrixTransform(matrix.inverse());
+      if(p.x<frame.left||p.x>frame.right||p.y<frame.top||p.y>frame.bottom){if(e.pointerType!=='touch')clear();return;}
+      const price=frame.lo+(p.x-frame.left)/(frame.right-frame.left)*(frame.hi-frame.lo);if(isDelta)wiDeltaHover=price;else wiHover=price;renderWhatIfCursor(isDelta);
+    };
+    svg.onpointermove=move;svg.onpointerdown=e=>{move(e);if(e.pointerType==='touch')svg.setPointerCapture(e.pointerId);};svg.onpointerleave=e=>{if(e.pointerType!=='touch')clear();};svg.onpointercancel=clear;
+  }
+  let resizeFrame=0;window.addEventListener('resize',()=>{cancelAnimationFrame(resizeFrame);resizeFrame=requestAnimationFrame(()=>{renderCharts();renderWhatIf();});});
+  $('report').onclick=()=>{$('reportText').value=textReport();$('reportText').hidden=false;$('reportText').focus();$('reportText').select();download('option-trainer-report.txt',$('reportText').value,'text/plain;charset=utf-8');};
+  $('saveSession').onclick=()=>download('option-trainer-session.json',JSON.stringify(sessionExport(),null,2),'application/json');
+  $('loadSession').onclick=()=>$('sessionFile').click();
+  $('sessionFile').onchange=async()=>{const f=$('sessionFile').files[0];if(!f)return;try{if(f.size>10000000)throw Error('Файл партии слишком большой');const data=JSON.parse(await f.text()),next=C.replay(data);game=next;ivShift=0;$('ivShift').value=0;
+    $('botTarget').value=game.bot.target;$('botStep').value=game.bot.step;$('botTolerance').value=game.bot.tolerance;$('autoTarget').value=game.auto.targetPct;
+    selectedLegs=new Set();excludedLegs=new Set();$('showLegs').checked=false;resetWhatIf();
+    if(data.view?.version===1){const saved=data.view.whatIf;for(const [key,id] of Object.entries(wiFields))if(typeof saved?.[key]==='string'&&saved[key].length<=40)$(id).value=saved[key];
+      if(Array.isArray(data.view.excludedLegs))excludedLegs=new Set(data.view.excludedLegs.filter(k=>C.active(game.book).some(p=>p.key===k)));}
+    render();message('Партия полностью воспроизведена. Контрольная сумма результата совпала; параметры What if восстановлены, если были сохранены.');
+    }catch(err){message('Импорт отменён: '+err.message,true);}finally{$('sessionFile').value='';}};
+  // Read-only diagnostics expose only the already-observed state, no future path.
+  window.TrainerDiagnostics=()=>({version:C.VERSION,tick:game.market.tick,knownMoments:game.history.length,seed:game.config.seed,
+    metrics:C.metrics(game),session:C.exportSession(game),legs:C.copy(game.book.legs),history:C.copy(game.history)});
+  resetWhatIf();loadInputs(game.config);presetPreview();render();$('setup').showModal();
+})();
+</script></body></html>
