@@ -171,7 +171,7 @@ footer{border-top:1px solid var(--line);margin-top:12px;padding:12px 8px 6px;fon
 </section><footer>
 <p>Учебная среда: синтетические цены, модельные спреды и условный капитал.</p>
 <div class="footer-credits"><span>© 2026 Опционная мастерская. All rights reserved.</span><a href="https://t.me/Evgeny_Gladky" target="_blank" rel="noopener noreferrer">Разработчик — @Evgeny_Gladky</a></div>
-</footer>
+<p class="analytics-notice"><small>Учитываем посещения сайта через Cloudflare. Решения и результаты игры не отправляются. <a href="https://developers.cloudflare.com/web-analytics/about/" target="_blank" rel="noopener noreferrer">О статистике</a></small></p></footer>
 </div>
 <dialog id="setup"><form id="setupForm"><div class="dialog-head"><div><h2>Новая игра</h2><p class="muted">Новый рынок начинается с выбранной цены. Его будущее будет открываться по ходу игры.</p></div><button type="button" id="cancelSetup" aria-label="Закрыть настройки">×</button></div>
 <div class="three"><label>Начальная цена<input id="startPrice" type="number" value="100" min="1" step="any" required></label><label>Экспирация<select id="days"><option value="7">7 дней</option><option value="14" selected>14 дней</option><option value="30">30 дней</option></select></label><label>Начальная IV, %<input id="startIV" type="number" value="60" min="5" max="300" step="1" required></label>
@@ -1392,4 +1392,21 @@ if(typeof module!=='undefined'&&module.exports)module.exports=TrainerAttribution
     metrics:C.metrics(game),session:C.exportSession(game),legs:C.copy(game.book.legs),history:C.copy(game.history),prehistory:C.copy(game.prehistory)});
   resetWhatIf();loadInputs(game.config);presetPreview();render();$('setup').showModal();requestAnimationFrame(presetPreview);
 })();
-</script></body></html>
+</script><script id="workshop-visit-loader">
+// The site token permits collection only; dashboard access remains in Cloudflare.
+// Load on the published trainer URLs only. Offline copies never contact analytics.
+(() => {
+  'use strict';
+  const paths = ['/options-trainer/', '/options-trainer/index.html', '/options-trainer/workshop.html'];
+  if (location.protocol !== 'https:' || location.hostname !== 'egladky-web.github.io' || !paths.includes(location.pathname)) return;
+  if (navigator.globalPrivacyControl === true || navigator.doNotTrack === '1' || window.doNotTrack === '1') return;
+  if (document.getElementById('workshop-visit-beacon')) return;
+  const script = document.createElement('script');
+  script.id = 'workshop-visit-beacon';
+  script.type = 'module';
+  script.src = 'https://static.cloudflareinsights.com/beacon.min.js';
+  script.setAttribute('data-cf-beacon', JSON.stringify({token: 'bfa56305d3a54c70ad253501e75e94fb'}));
+  document.head.appendChild(script);
+})();
+</script>
+</body></html>
